@@ -36,26 +36,29 @@
             const screenWidth = window.screen.availWidth;
             const screenHeight = window.screen.availHeight;
 
-            // Width of each window: half the available screen width
+            // Calculate dimensions for each window (half width)
             const width = Math.floor(screenWidth / 2);
             const height = screenHeight;
 
-            // Open the first window (left side)
+            // Open the first window on the left
             const win1 = window.open(
                 'page1.html',
                 '_blank',
                 `width=${width},height=${height},top=0,left=0`
             );
 
-            // Open the second window (right side)
-            const win2 = window.open(
-                'page2.html',
-                '_blank',
-                `width=${width},height=${height},top=0,left=${width}`
-            );
+            // Wait a bit before opening the second window to ensure positioning works
+            setTimeout(() => {
+                const win2 = window.open(
+                    'page2.html',
+                    '_blank',
+                    `width=${width},height=${height},top=0,left=${width}`
+                );
 
-            // Focus the second window to ensure both open correctly
-            win2.focus();
+                // Bring both windows to the front to ensure correct rendering
+                if (win1) win1.focus();
+                if (win2) win2.focus();
+            }, 500);  // Delay of 500ms
         }
     </script>
 
