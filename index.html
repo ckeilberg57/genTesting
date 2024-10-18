@@ -3,26 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Split View Example</title>
+    <title>Open Split Pages</title>
     <style>
         body {
             margin: 0;
             display: flex;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
             background-color: #f0f0f0;
         }
 
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #0eb3c7;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0a95a4;
+        }
+
+        #iframeContainer {
+            display: none; /* Hidden until the button is clicked */
+            width: 100%;
+            height: 100vh;
+        }
+
         iframe {
             border: none;
-            width: 50%; /* Half the screen width */
+            width: 50%; /* Each iframe takes half of the screen */
             height: 100%; /* Full screen height */
         }
     </style>
 </head>
 <body>
 
-    <iframe src="page1.html"></iframe>
-    <iframe src="page2.html"></iframe>
+    <button id="openButton">Open Split Pages</button>
+
+    <div id="iframeContainer">
+        <iframe src="page1.html"></iframe>
+        <iframe src="page2.html"></iframe>
+    </div>
+
+    <script>
+        document.getElementById('openButton').addEventListener('click', function() {
+            // Hide the button and show the iframe container
+            document.getElementById('openButton').style.display = 'none';
+            document.getElementById('iframeContainer').style.display = 'flex';
+        });
+    </script>
 
 </body>
 </html>
