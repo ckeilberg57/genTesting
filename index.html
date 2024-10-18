@@ -3,64 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open Split Windows</title>
+    <title>Split View Example</title>
     <style>
         body {
+            margin: 0;
             display: flex;
-            justify-content: center;
-            align-items: center;
             height: 100vh;
             background-color: #f0f0f0;
-            margin: 0;
         }
-        button {
-            padding: 15px 30px;
-            font-size: 18px;
-            background-color: #0eb3c7;
-            color: white;
+
+        iframe {
             border: none;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0a95a4;
+            width: 50%; /* Half the screen width */
+            height: 100%; /* Full screen height */
         }
     </style>
 </head>
 <body>
 
-    <button onclick="openSplitWindows()">Open Split Pages</button>
-
-    <script>
-        function openSplitWindows() {
-            const screenWidth = window.screen.availWidth;
-            const screenHeight = window.screen.availHeight;
-
-            // Calculate dimensions for each window (half width)
-            const width = Math.floor(screenWidth / 2);
-            const height = screenHeight;
-
-            // Open the first window on the left
-            const win1 = window.open(
-                'page1.html',
-                '_blank',
-                `width=${width},height=${height},top=0,left=0`
-            );
-
-            // Wait a bit before opening the second window to ensure positioning works
-            setTimeout(() => {
-                const win2 = window.open(
-                    'page2.html',
-                    '_blank',
-                    `width=${width},height=${height},top=0,left=${width}`
-                );
-
-                // Bring both windows to the front to ensure correct rendering
-                if (win1) win1.focus();
-                if (win2) win2.focus();
-            }, 500);  // Delay of 500ms
-        }
-    </script>
+    <iframe src="page1.html"></iframe>
+    <iframe src="page2.html"></iframe>
 
 </body>
 </html>
