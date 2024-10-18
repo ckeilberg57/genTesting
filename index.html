@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Split Windows</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #0eb3c7;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0a95a4;
+        }
+    </style>
+</head>
+<body>
+
+    <button onclick="openSplitWindows()">Open Split Pages</button>
+
+    <script>
+        function openSplitWindows() {
+            const screenWidth = window.screen.width;
+            const screenHeight = window.screen.height;
+
+            // Calculate width and height for each window (half the screen width)
+            const width = Math.floor(screenWidth / 2);
+            const height = screenHeight;
+
+            // Open the first window on the left
+            window.open('page1.html', '_blank', `width=${width},height=${height},top=0,left=0`);
+
+            // Open the second window on the right
+            window.open('page2.html', '_blank', `width=${width},height=${height},top=0,left=${width}`);
+        }
+    </script>
+
+</body>
+</html>
