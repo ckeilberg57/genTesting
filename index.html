@@ -21,16 +21,110 @@
     document.getElementById('register').click();
   }
     </script>
+    <script>
+  // Open popup form on page load
+  window.onload = () => {
+    loadDevices();
+    document.getElementById('popupForm').style.display = 'block';
+  };
+
+  // Load available devices into dropdowns
+  async function loadDevices() {
+    try {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+
+      const audioInput = devices.filter(device => device.kind === 'audioinput');
+      const audioOutput = devices.filter(device => device.kind === 'audiooutput');
+      const videoInput = devices.filter(device => device.kind === 'videoinput');
+
+      populateSelect('popupAudioSource', audioInput);
+      populateSelect('popupAudioOutput', audioOutput);
+      populateSelect('popupVideoSource', videoInput);
+
+      populateSelect('audioSource', audioInput);
+      populateSelect('audioOutput', audioOutput);
+      populateSelect('videoSource', videoInput);
+    } catch (error) {
+      console.error('Error loading devices:', error);
+    }
+  }
+
+  // Populate dropdown with device options
+  function populateSelect(selectId, devices) {
+    const select = document.getElementById(selectId);
+    select.innerHTML = '';
+    devices.forEach(device => {
+      const option = document.createElement('option');
+      option.value = device.deviceId;
+      option.textContent = device.label || 'Unknown Device';
+      select.appendChild(option);
+    });
+  }
+
+  // Save selected peripherals and close the popup
+  function savePeripherals() {
+    const audioSource = document.getElementById('popupAudioSource').value;
+    const audioOutput = document.getElementById('popupAudioOutput').value;
+    const videoSource = document.getElementById('popupVideoSource').value;
+
+    // Update main form selections
+    document.getElementById('audioSource').value = audioSource;
+    document.getElementById('audioOutput').value = audioOutput;
+    document.getElementById('videoSource').value = videoSource;
+
+    // Hide popup and show header + change peripherals flag
+    document.getElementById('popupForm').style.display = 'none';
+    document.getElementById('headerMenu').style.display = 'none';
+    document.getElementById('changePeripherals').style.display = 'block';
+  }
+
+  // Toggle visibility of header menu
+  function toggleHeaderMenu() {
+    const header = document.getElementById('headerMenu');
+    header.style.display = header.style.display === 'none' ? 'block' : 'none';
+  }
+</script>
 
 </head>
 <body>
 
 <!-- <input type="checkbox" id="pullDown"/> -->
+<div id="changePeripherals" onclick="toggleHeaderMenu()">Change Peripherals</div>
+<!-- Header Menu (Hidden Initially) -->
 <div id="headerMenu">
+  <p class="select">
+    <label for="audioSource">Microphone:</label>
+    <select id="audioSource"></select>
+  </p>
+  <p class="select">
+    <label for="audioOutput">Speakers:</label>
+    <select id="audioOutput"></select>
+  </p>
+  <p class="select">
+    <label for="videoSource">Camera:</label>
+    <select id="videoSource"></select>
+  </p>
+</div>
+
+<!-- Popup Form -->
+<div id="popupForm" class="popup-form">
+  <h2>Select Your Peripherals</h2>
+  <label for="popupAudioSource">Microphone:</label>
+  <select id="popupAudioSource"></select>
+
+  <label for="popupAudioOutput">Speakers:</label>
+  <select id="popupAudioOutput"></select>
+
+  <label for="popupVideoSource">Camera:</label>
+  <select id="popupVideoSource"></select>
+
+  <button onclick="savePeripherals()">Submit</button>
+</div>
+<!-- <div id="headerMenu">
   <p class="select"><label for="audioSource">Microphone: </label><select id="audioSource"></select></p>
   <p class="select"><label for="audioOutput">Speakers: </label><select id="audioOutput"></select></p>
   <p class="select"><label for="videoSource">Camera: </label><select id="videoSource"></select></p>
-</div>
+</div> -->
 <!-- <label id="pullDownLabel" for="pullDown"><p>Settings</p></label> -->
 
 
