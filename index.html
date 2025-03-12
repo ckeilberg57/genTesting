@@ -10,80 +10,85 @@
     <link rel="stylesheet" href="css/vidplayer.css">
     <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <script defer>
-      // Open popup form on page load
-      window.onload = () => {
-        loadDevices();
-        document.getElementById('popupForm').style.display = 'block';
-      };
-    
-      // Load available devices into dropdowns
-      async function loadDevices() {
-        try {
-          const devices = await navigator.mediaDevices.enumerateDevices();
-    
-          const audioInput = devices.filter(device => device.kind === 'audioinput');
-          const audioOutput = devices.filter(device => device.kind === 'audiooutput');
-          const videoInput = devices.filter(device => device.kind === 'videoinput');
-    
-          populateSelect('popupAudioSource', audioInput);
-          populateSelect('popupAudioOutput', audioOutput);
-          populateSelect('popupVideoSource', videoInput);
-    
-          populateSelect('audioSource', audioInput);
-          populateSelect('audioOutput', audioOutput);
-          populateSelect('videoSource', videoInput);
-        } catch (error) {
-          console.error('Error loading devices:', error);
-        }
-      }
-    
-      // Populate dropdown with device options
-      function populateSelect(selectId, devices) {
-        const select = document.getElementById(selectId);
-        select.innerHTML = '';
-        devices.forEach(device => {
-          const option = document.createElement('option');
-          option.value = device.deviceId;
-          option.textContent = device.label || 'Unknown Device';
-          select.appendChild(option);
-        });
-      }
-    
-      // Save selected peripherals and close the popup
-      function savePeripherals() {
-        const audioSource = document.getElementById('popupAudioSource').value;
-        const audioOutput = document.getElementById('popupAudioOutput').value;
-        const videoSource = document.getElementById('popupVideoSource').value;
-    
-        // Update main form selections
-        document.getElementById('audioSource').value = audioSource;
-        document.getElementById('audioOutput').value = audioOutput;
-        document.getElementById('videoSource').value = videoSource;
-    
-        // Hide popup and show header + change peripherals flag
-        document.getElementById('popupForm').style.display = 'none';
-        document.getElementById('headerMenu').style.display = 'none';
-        document.getElementById('changePeripherals').style.display = 'block';
-      }
-    
-      // Toggle visibility of header menu
-      function toggleHeaderMenu() {
-        const header = document.getElementById('headerMenu');
-        header.style.display = header.style.display === 'none' ? 'block' : 'none';
-      }
-    </script>
-    <script type="text/javascript" src="https://cklab-edgenc01.ck-collab-engtest.com/static/webrtc/js/pexrtc.js" defer></script>
-    <script type="text/javascript" src="js/feec/pexrtc-wrapper.js" defer></script>
-    <script type="text/javascript" src="js/feec/feecModule.js" defer></script>
-    <script type="text/javascript" src="js/library.js" defer></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" defer></script>
+<script defer>
+  window.onload = async () => {
+    // Load devices first
+    await loadDevices();
 
-    <script type="text/javascript" defer>
-      window.onload = function(){
-    document.getElementById('register').click();
+    // Display the popup form after loading
+    document.getElementById('popupForm').style.display = 'block';
+
+    // Simulate register button click after loading devices
+    setTimeout(() => {
+      const registerButton = document.getElementById('register');
+      if (registerButton) registerButton.click();
+    }, 100);
+  };
+
+  // Load available devices into dropdowns
+  async function loadDevices() {
+    try {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+
+      const audioInput = devices.filter(device => device.kind === 'audioinput');
+      const audioOutput = devices.filter(device => device.kind === 'audiooutput');
+      const videoInput = devices.filter(device => device.kind === 'videoinput');
+
+      populateSelect('popupAudioSource', audioInput);
+      populateSelect('popupAudioOutput', audioOutput);
+      populateSelect('popupVideoSource', videoInput);
+
+      populateSelect('audioSource', audioInput);
+      populateSelect('audioOutput', audioOutput);
+      populateSelect('videoSource', videoInput);
+    } catch (error) {
+      console.error('Error loading devices:', error);
+    }
   }
-    </script>
+
+  // Populate dropdown with device options
+  function populateSelect(selectId, devices) {
+    const select = document.getElementById(selectId);
+    select.innerHTML = '';
+    devices.forEach(device => {
+      const option = document.createElement('option');
+      option.value = device.deviceId;
+      option.textContent = device.label || 'Unknown Device';
+      select.appendChild(option);
+    });
+  }
+
+  // Save selected peripherals and close the popup
+  function savePeripherals() {
+    const audioSource = document.getElementById('popupAudioSource').value;
+    const audioOutput = document.getElementById('popupAudioOutput').value;
+    const videoSource = document.getElementById('popupVideoSource').value;
+
+    // Update main form selections
+    document.getElementById('audioSource').value = audioSource;
+    document.getElementById('audioOutput').value = audioOutput;
+    document.getElementById('videoSource').value = videoSource;
+
+    // Hide popup and show header + change peripherals flag
+    document.getElementById('popupForm').style.display = 'none';
+    document.getElementById('headerMenu').style.display = 'none';
+    document.getElementById('changePeripherals').style.display = 'block';
+  }
+
+  // Toggle visibility of header menu
+  function toggleHeaderMenu() {
+    const header = document.getElementById('headerMenu');
+    header.style.display = header.style.display === 'none' ? 'block' : 'none';
+  }
+</script>
+
+<!-- External Scripts -->
+<script type="text/javascript" src="https://cklab-edgenc01.ck-collab-engtest.com/static/webrtc/js/pexrtc.js" defer></script>
+<script type="text/javascript" src="js/feec/pexrtc-wrapper.js" defer></script>
+<script type="text/javascript" src="js/feec/feecModule.js" defer></script>
+<script type="text/javascript" src="js/library.js" defer></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" defer></script>
+
 
 </head>
 <body>
