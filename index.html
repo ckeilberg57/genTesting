@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/vidplayer.css">
     <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-    <script>
+    <script defer>
       // Open popup form on page load
       window.onload = () => {
         loadDevices();
@@ -73,13 +73,13 @@
         header.style.display = header.style.display === 'none' ? 'block' : 'none';
       }
     </script>
-    <script type="text/javascript" src="https://cklab-edgenc01.ck-collab-engtest.com/static/webrtc/js/pexrtc.js"></script>
-    <script type="text/javascript" src="js/feec/pexrtc-wrapper.js"></script>
-    <script type="text/javascript" src="js/feec/feecModule.js"></script>
-    <script type="text/javascript" src="js/library.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cklab-edgenc01.ck-collab-engtest.com/static/webrtc/js/pexrtc.js" defer></script>
+    <script type="text/javascript" src="js/feec/pexrtc-wrapper.js" defer></script>
+    <script type="text/javascript" src="js/feec/feecModule.js" defer></script>
+    <script type="text/javascript" src="js/library.js" defer></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" defer></script>
 
-    <script type="text/javascript">
+    <script type="text/javascript" defer>
       window.onload = function(){
     document.getElementById('register').click();
   }
