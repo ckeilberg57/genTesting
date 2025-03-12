@@ -10,90 +10,137 @@
     <link rel="stylesheet" href="css/vidplayer.css">
     <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
-<script defer>
-  window.onload = async () => {
-    // Load devices first
-    await loadDevices();
+    <script defer>
+      window.onload = async () => {
+        // Load devices and set initial state
+        await loadDevices();
 
-    // Display the popup form after loading
-    document.getElementById('popupForm').style.display = 'block';
+        // Check if peripherals have already been set
+        if (localStorage.getItem('peripheralsSet') === 'true') {
+          loadPeripherals();
+          document.getElementById('popupForm').style.display = 'none';
+        } else {
+          document.getElementById('popupForm').style.display = 'block';
+        }
 
-    // Simulate register button click after loading devices
-    setTimeout(() => {
-      const registerButton = document.getElementById('register');
-      if (registerButton) registerButton.click();
-    }, 100);
-  };
+        // Simulate register button click after loading devices
+        setTimeout(() => {
+          const registerButton = document.getElementById('register');
+          if (registerButton) registerButton.click();
+        }, 100);
+      };
 
-  // Load available devices into dropdowns
-  async function loadDevices() {
-    try {
-      const devices = await navigator.mediaDevices.enumerateDevices();
+      // Load available devices into dropdowns
+      async function loadDevices() {
+        try {
+          const devices = await navigator.mediaDevices.enumerateDevices();
 
-      const audioInput = devices.filter(device => device.kind === 'audioinput');
-      const audioOutput = devices.filter(device => device.kind === 'audiooutput');
-      const videoInput = devices.filter(device => device.kind === 'videoinput');
+          const audioInput = devices.filter(device => device.kind === 'audioinput');
+          const audioOutput = devices.filter(device => device.kind === 'audiooutput');
+          const videoInput = devices.filter(device => device.kind === 'videoinput');
 
-      populateSelect('popupAudioSource', audioInput);
-      populateSelect('popupAudioOutput', audioOutput);
-      populateSelect('popupVideoSource', videoInput);
+          // Populate both popup and header dropdowns
+          populateSelect('popupAudioSource', audioInput);
+          populateSelect('popupAudioOutput', audioOutput);
+          populateSelect('popupVideoSource', videoInput);
 
-      populateSelect('audioSource', audioInput);
-      populateSelect('audioOutput', audioOutput);
-      populateSelect('videoSource', videoInput);
-    } catch (error) {
-      console.error('Error loading devices:', error);
-    }
-  }
+          populateSelect('audioSource', audioInput);
+          populateSelect('audioOutput', audioOutput);
+          populateSelect('videoSource', videoInput);
 
-  // Populate dropdown with device options
-  function populateSelect(selectId, devices) {
-    const select = document.getElementById(selectId);
-    select.innerHTML = '';
-    devices.forEach(device => {
-      const option = document.createElement('option');
-      option.value = device.deviceId;
-      option.textContent = device.label || 'Unknown Device';
-      select.appendChild(option);
-    });
-  }
+        } catch (error) {
+          console.error('Error loading devices:', error);
+        }
+      }
 
-  // Save selected peripherals and close the popup
-  function savePeripherals() {
-    const audioSource = document.getElementById('popupAudioSource').value;
-    const audioOutput = document.getElementById('popupAudioOutput').value;
-    const videoSource = document.getElementById('popupVideoSource').value;
+      // Populate dropdown with device options
+      function populateSelect(selectId, devices) {
+        const select = document.getElementById(selectId);
+        select.innerHTML = '';
+        devices.forEach(device => {
+          const option = document.createElement('option');
+          option.value = device.deviceId;
+          option.textContent = device.label || 'Unknown Device';
+          select.appendChild(option);
+        });
+      }
 
-    // Update main form selections
-    document.getElementById('audioSource').value = audioSource;
-    document.getElementById('audioOutput').value = audioOutput;
-    document.getElementById('videoSource').value = videoSource;
+      // Save selected peripherals and close the popup
+      function savePeripherals() {
+        const audioSource = document.getElementById('popupAudioSource').value;
+        const audioOutput = document.getElementById('popupAudioOutput').value;
+        const videoSource = document.getElementById('popupVideoSource').value;
 
-    // Hide popup and show header + change peripherals flag
-    document.getElementById('popupForm').style.display = 'none';
-    document.getElementById('headerMenu').style.display = 'none';
-    document.getElementById('changePeripherals').style.display = 'block';
-  }
+        // Save to localStorage
+        localStorage.setItem('audioInput', audioSource);
+        localStorage.setItem('audioOutput', audioOutput);
+        localStorage.setItem('videoInput', videoSource);
+        localStorage.setItem('peripheralsSet', 'true'); // Mark as set
 
-  // Toggle visibility of header menu
-  function toggleHeaderMenu() {
-    const header = document.getElementById('headerMenu');
-    header.style.display = header.style.display === 'none' ? 'block' : 'none';
-  }
-</script>
+        // Update header dropdowns
+        document.getElementById('audioSource').value = audioSource;
+        document.getElementById('audioOutput').value = audioOutput;
+        document.getElementById('videoSource').value = videoSource;
 
-<!-- External Scripts -->
-<script type="text/javascript" src="https://cklab-edgenc01.ck-collab-engtest.com/static/webrtc/js/pexrtc.js" defer></script>
-<script type="text/javascript" src="js/feec/pexrtc-wrapper.js" defer></script>
-<script type="text/javascript" src="js/feec/feecModule.js" defer></script>
-<script type="text/javascript" src="js/library.js" defer></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" defer></script>
+        // Hide the popup and display the header menu
+        document.getElementById('popupForm').style.display = 'none';
+        document.getElementById('headerMenu').style.display = 'none';
+        document.getElementById('changePeripherals').style.display = 'block';
+      }
 
+      // Load saved peripherals into dropdowns
+      function loadPeripherals() {
+        const audioInput = localStorage.getItem('audioInput');
+        const audioOutput = localStorage.getItem('audioOutput');
+        const videoInput = localStorage.getItem('videoInput');
+
+        if (audioInput) {
+          document.getElementById('popupAudioSource').value = audioInput;
+          document.getElementById('audioSource').value = audioInput;
+        }
+        if (audioOutput) {
+          document.getElementById('popupAudioOutput').value = audioOutput;
+          document.getElementById('audioOutput').value = audioOutput;
+        }
+        if (videoInput) {
+          document.getElementById('popupVideoSource').value = videoInput;
+          document.getElementById('videoSource').value = videoInput;
+        }
+      }
+
+      // Toggle visibility of header menu
+      function toggleHeaderMenu() {
+        const header = document.getElementById('headerMenu');
+        header.style.display = header.style.display === 'none' ? 'block' : 'none';
+      }
+
+      // Ensure disconnect button clears peripherals and redirects
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('id_disconnect').addEventListener('click', () => {
+          // Remove saved peripherals
+          localStorage.removeItem('audioInput');
+          localStorage.removeItem('audioOutput');
+          localStorage.removeItem('videoInput');
+          localStorage.removeItem('peripheralsSet');
+
+          // Redirect to index.html
+          window.location = 'index.html';
+        });
+      });
+    </script>
+
+    <!-- External Scripts -->
+    <script type="text/javascript" src="https://cklab-edgenc01.ck-collab-engtest.com/static/webrtc/js/pexrtc.js" defer></script>
+    <script type="text/javascript" src="js/feec/pexrtc-wrapper.js" defer></script>
+    <script type="text/javascript" src="js/feec/feecModule.js" defer></script>
+    <script type="text/javascript" src="js/library.js" defer></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" defer></script>
 </head>
 <body>
 
-<!-- <input type="checkbox" id="pullDown"/> -->
+<!-- Change Peripherals Section -->
 <div id="changePeripherals" onclick="toggleHeaderMenu()">Change Peripherals</div>
+
 <!-- Header Menu (Hidden Initially) -->
 <div id="headerMenu">
   <p class="select">
@@ -124,22 +171,17 @@
 
   <button onclick="savePeripherals()">Submit</button>
 </div>
-<!-- <div id="headerMenu">
-  <p class="select"><label for="audioSource">Microphone: </label><select id="audioSource"></select></p>
-  <p class="select"><label for="audioOutput">Speakers: </label><select id="audioOutput"></select></p>
-  <p class="select"><label for="videoSource">Camera: </label><select id="videoSource"></select></p>
-</div> -->
-<!-- <label id="pullDownLabel" for="pullDown"><p>Settings</p></label> -->
 
-
+<!-- Video Stage -->
 <div class="videoStage" align="center">
-<video width="98%" id="video" playsinline="playsinline" poster="img/hospital.gif" class="mediastream" muted autoplay="autoplay"/>
+  <video width="98%" id="video" playsinline="playsinline" poster="img/hospital.gif" class="mediastream" muted autoplay="autoplay"></video>
 </div>
-<br>
+
+<!-- Corner Navigation -->
 <div class="cornerNav">
- <ul class="close">
-        <li class="icon-off" onclick="window.location='index.html';" id="id_disconnect"></li>
-    </ul>
+  <ul class="close">
+    <li class="icon-off" id="id_disconnect"></li>
+  </ul>
 </div>
 
 <div class="regForm" style="display: none;">
