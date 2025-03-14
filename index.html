@@ -15,7 +15,7 @@
         await loadDevices();
 
         // Check if peripherals have already been set
-        if (localStorage.getItem('peripheralsSet') === 'true') {
+        if (sessionStorage.getItem('peripheralsSet') === 'true') {
           loadPeripherals();
           document.getElementById('popupForm').style.display = 'none';
         } else {
