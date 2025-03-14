@@ -176,12 +176,15 @@
   <video width="98%" id="video" playsinline="playsinline" poster="img/hospital.gif" class="mediastream" muted autoplay="autoplay"></video>
 </div>
 
-<!-- Corner Navigation -->
+<!-- Corner Navigation
 <div class="cornerNav">
   <ul class="close">
     <li class="icon-off" id="id_disconnect"></li>
   </ul>
-</div>
+</div> -->
+
+<!-- Clean Up Session Button -->
+<button class="button" id="cleanUpSession">Clean Up Session</button>
 
 <div class="regForm" style="display: none;">
     <form>
@@ -683,6 +686,12 @@ videoSelect.onchange = start;
 
 start();
 
+</script>
+<script>
+        // Clean Up Session (Redirect but keep stored peripherals)
+        cleanUpButton.addEventListener("click", () => {
+            window.location.href = "index.html"; // Redirect to index.html
+        });
 </script>
     
 </body>
