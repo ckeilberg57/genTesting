@@ -711,7 +711,6 @@ start();
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         const regForm = document.getElementById("regForm");
-        const peripheralsForm = document.getElementById("peripheralsForm");
 
         // Load stored registration data (if available)
         const storedAlias = localStorage.getItem("reg_alias");
@@ -722,7 +721,6 @@ start();
         // If registration data exists, skip registration form
         if (storedAlias && storedUsername && storedPassword && storedHost) {
             regForm.classList.add("hidden");
-            peripheralsForm.classList.remove("hidden");
         }
 
         // Handle registration form submission
