@@ -363,12 +363,12 @@ body {
             display: block;
             width: 100%;
             padding: 10px;
-            background-color: #0eb3c7;
-            color: white;
+            background-color: #fff;
+            color: #0a2136;
             border: none;
             cursor: pointer;
             font-size: 16px;
             position: absolute;
-            bottom: 10px;
+            bottom: 0px;
             left: 0;
         }
