@@ -155,6 +155,21 @@
     <select id="videoSource"></select>
   </p>
 </div>
+    
+<!-- Popup Form -->
+<div id="popupForm" class="popup-form">
+  <h2>Confirm Your Peripherals</h2>
+  <label for="popupAudioSource">Microphone:</label>
+  <select id="popupAudioSource"></select>
+
+  <label for="popupAudioOutput">Speakers:</label>
+  <select id="popupAudioOutput"></select>
+
+  <label for="popupVideoSource">Camera:</label>
+  <select id="popupVideoSource"></select>
+
+  <button onclick="savePeripherals()">Submit</button>
+</div>
 
 <!-- Registration Form (Hidden Initially) -->
 <div class="regForm" id="registrationForm" style="display: none;">
@@ -175,21 +190,6 @@
         <input class="green cinput" id="register" type="button" onclick="registerUser()" value="Register" />
         <label id="regerror" class="red"></label><br/>
     </form>
-</div>
-    
-<!-- Popup Form -->
-<div id="popupForm" class="popup-form">
-  <h2>Confirm Your Peripherals</h2>
-  <label for="popupAudioSource">Microphone:</label>
-  <select id="popupAudioSource"></select>
-
-  <label for="popupAudioOutput">Speakers:</label>
-  <select id="popupAudioOutput"></select>
-
-  <label for="popupVideoSource">Camera:</label>
-  <select id="popupVideoSource"></select>
-
-  <button onclick="savePeripherals()">Submit</button>
 </div>
 
 <!-- Video Stage -->
