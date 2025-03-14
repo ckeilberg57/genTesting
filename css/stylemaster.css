@@ -358,13 +358,14 @@ body {
         text-decoration: none;
         cursor: pointer;
         }
+
         }
         .cleanUpButton {
             display: block;
             width: 100%;
             padding: 10px;
-            background-color: #fff;
-            color: #0a2136;
+            background-color: #0a2136;
+            color: #fff;
             border: none;
             cursor: pointer;
             font-size: 16px;
