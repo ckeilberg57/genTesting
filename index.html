@@ -547,6 +547,44 @@
     </div>
 </div> -->
 
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const regForm = document.getElementById("regForm");
+
+        // Load stored registration data (if available)
+        const storedAlias = localStorage.getItem("reg_alias");
+        const storedUsername = localStorage.getItem("reg_username");
+        const storedPassword = localStorage.getItem("reg_password");
+        const storedHost = localStorage.getItem("reg_host");
+
+        // If registration data exists, skip registration form
+        if (storedAlias && storedUsername && storedPassword && storedHost) {
+            regForm.classList.add("hidden");
+        }
+
+        // Handle registration form submission
+        document.getElementById("register").addEventListener("click", () => {
+            const alias = document.getElementById("reg_alias").value.trim();
+            const username = document.getElementById("reg_username").value.trim();
+            const password = document.getElementById("reg_password").value.trim();
+            const host = document.getElementById("reg_host").value.trim();
+
+            if (!alias || !username || !password || !host) {
+                document.getElementById("regerror").innerText = "All fields are required.";
+                return;
+            }
+
+            // Store in localStorage
+            localStorage.setItem("reg_alias", alias);
+            localStorage.setItem("reg_username", username);
+            localStorage.setItem("reg_password", password);
+            localStorage.setItem("reg_host", host);
+
+            // Hide registration form and show peripherals form
+            regForm.classList.add("hidden");
+        });
+</script>
+
 <!-- Video Controls JS --> 
 
 <script type="text/javascript">
@@ -708,42 +746,5 @@ start();
         });
 </script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const regForm = document.getElementById("regForm");
-
-        // Load stored registration data (if available)
-        const storedAlias = localStorage.getItem("reg_alias");
-        const storedUsername = localStorage.getItem("reg_username");
-        const storedPassword = localStorage.getItem("reg_password");
-        const storedHost = localStorage.getItem("reg_host");
-
-        // If registration data exists, skip registration form
-        if (storedAlias && storedUsername && storedPassword && storedHost) {
-            regForm.classList.add("hidden");
-        }
-
-        // Handle registration form submission
-        document.getElementById("register").addEventListener("click", () => {
-            const alias = document.getElementById("reg_alias").value.trim();
-            const username = document.getElementById("reg_username").value.trim();
-            const password = document.getElementById("reg_password").value.trim();
-            const host = document.getElementById("reg_host").value.trim();
-
-            if (!alias || !username || !password || !host) {
-                document.getElementById("regerror").innerText = "All fields are required.";
-                return;
-            }
-
-            // Store in localStorage
-            localStorage.setItem("reg_alias", alias);
-            localStorage.setItem("reg_username", username);
-            localStorage.setItem("reg_password", password);
-            localStorage.setItem("reg_host", host);
-
-            // Hide registration form and show peripherals form
-            regForm.classList.add("hidden");
-        });
-        </script>
 </body>
 </html>
