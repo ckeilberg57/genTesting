@@ -359,7 +359,6 @@ body {
         cursor: pointer;
         }
 
-        }
         .cleanUpButton {
             display: block;
             width: 100%;
@@ -373,3 +372,4 @@ body {
             bottom: 0px;
             left: 0;
         }
+}
