@@ -212,6 +212,16 @@
 
 <div class="hideAll" style="display: none;">
 
+<div class="cornerNav">
+ <ul class="close">
+        <li class="icon-star"></li>
+        <li class="icon-microphone"></li>
+        <li class="icon-volume-up"></li>
+        <li class="icon-off" onclick="window.location='index.html';" id="id_disconnect"></li>
+        <div class="icon-plus-sign-alt" id="btn"></div>
+    </ul>
+</div>
+
  <!-- <div id="myinfomodal" class="infomodal">
         <div class="infomodal-content">
             <span class="infomodal-close" onclick="hide_info()">&times;</span>
@@ -687,38 +697,6 @@ videoSelect.onchange = start;
 
 start();
 
-</script>
-    
-<!-- Clean Up Session Button -->
-<button id="cleanupSession" class="red cinput" onclick="cleanUpSession()">Clean Up Session</button>
-
-<script>
-function cleanUpSession() {
-    // Get the current selections
-    const selectedPeripherals = {
-        camera: document.getElementById("cameraSelect")?.value,
-        microphone: document.getElementById("microphoneSelect")?.value,
-        speaker: document.getElementById("speakerSelect")?.value
-    };
-
-    // Store selections in sessionStorage
-    sessionStorage.setItem("selectedPeripherals", JSON.stringify(selectedPeripherals));
-
-    // Reload the page
-    document.getElementById("id_disconnect").addEventListener("click", () => {
-        location.reload();
-});
-
-// Restore selections after reload
-window.onload = function() {
-    const storedPeripherals = JSON.parse(sessionStorage.getItem("selectedPeripherals"));
-
-    if (storedPeripherals) {
-        document.getElementById("cameraSelect").value = storedPeripherals.camera || "";
-        document.getElementById("microphoneSelect").value = storedPeripherals.microphone || "";
-        document.getElementById("speakerSelect").value = storedPeripherals.speaker || "";
-    }
-};
 </script>
 
 </body>
