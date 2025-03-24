@@ -688,11 +688,36 @@ videoSelect.onchange = start;
 start();
 
 </script>
+    
+<!-- Clean Up Session Button -->
+<button id="cleanupSession" class="red cinput" onclick="cleanUpSession()">Clean Up Session</button>
+
 <script>
-        // Clean Up Session (Redirect but keep stored peripherals)
-        cleanUpButton.addEventListener("click", () => {
-            window.location.href = "index.html"; // Redirect to index.html
-        });
+function cleanUpSession() {
+    // Get the current selections
+    const selectedPeripherals = {
+        camera: document.getElementById("cameraSelect")?.value,
+        microphone: document.getElementById("microphoneSelect")?.value,
+        speaker: document.getElementById("speakerSelect")?.value
+    };
+
+    // Store selections in sessionStorage
+    sessionStorage.setItem("selectedPeripherals", JSON.stringify(selectedPeripherals));
+
+    // Reload the page
+    location.reload();
+}
+
+// Restore selections after reload
+window.onload = function() {
+    const storedPeripherals = JSON.parse(sessionStorage.getItem("selectedPeripherals"));
+
+    if (storedPeripherals) {
+        document.getElementById("cameraSelect").value = storedPeripherals.camera || "";
+        document.getElementById("microphoneSelect").value = storedPeripherals.microphone || "";
+        document.getElementById("speakerSelect").value = storedPeripherals.speaker || "";
+    }
+};
 </script>
 
 </body>
