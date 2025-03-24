@@ -182,8 +182,6 @@
   <video width="98%" id="video" playsinline="playsinline" poster="img/hospital.gif" class="mediastream" muted autoplay="autoplay"></video>
 </div>
 
-<!-- Registration Toggle Button -->
-<button id="registrationToggle" class="green cinput" onclick="toggleRegistration()">Registered</button>
 <!-- Clean Up Session Button -->
 <button class="cleanUpButton" id="cleanUpSession">Clean Up Session</button>
 
@@ -536,26 +534,6 @@
     </div>
 </div> -->
 
-
-<!-- Toggle Registration -->
-<script>
-function toggleRegistration() {
-    const regForm = document.getElementById("regFormContainer");
-    const toggleButton = document.getElementById("registrationToggle");
-
-    if (regForm.style.display === "none") {
-        regForm.style.display = "block";
-        toggleButton.textContent = "Unregister";
-        toggleButton.classList.remove("green");
-        toggleButton.classList.add("red");
-    } else {
-        regForm.style.display = "none";
-        toggleButton.textContent = "Registered";
-        toggleButton.classList.remove("red");
-        toggleButton.classList.add("green");
-    }
-}
-</script>
 <!-- Video Controls JS --> 
 
 <script type="text/javascript">
