@@ -65,6 +65,11 @@ body {
   z-index: 999;
 }
 
+.cornerNav
+{
+  color:fff;
+}
+
 .form {
   background-color: #15172b;
   border-radius: 20px;
