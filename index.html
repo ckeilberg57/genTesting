@@ -182,6 +182,8 @@
   <video width="98%" id="video" playsinline="playsinline" poster="img/hospital.gif" class="mediastream" muted autoplay="autoplay"></video>
 </div>
 
+<!-- Registration Toggle Button -->
+<button id="registrationToggle" class="green cinput" onclick="toggleRegistration()">Registered</button>
 <!-- Clean Up Session Button -->
 <button class="cleanUpButton" id="cleanUpSession">Clean Up Session</button>
 
@@ -191,7 +193,8 @@
     <label class="clabel">Username </label><input class="cinput" type="text" id="reg_username" value="admin" size=40 /><br/>
     <label class="clabel">Password </label><input class="cinput" type="password" id="reg_password" value="R3g1$tr" size=40 /><br/>
     <label class="clabel">Host </label><input class="cinput" type="text" id="reg_host" value="cklab-edgenc01.ck-collab-engtest.com" size=40 /><br/><br/>
-    <input class="green cinput" id="register" type="button" onclick="reg.register()" value="Register" /><label id="regerror" class="red"></label><br/>
+    <input class="green cinput" id="register" type="button" onclick="reg.register()" value="Register" />
+    <label id="regerror" class="red"></label><br/>
     </form>
 </div>
     
@@ -533,6 +536,26 @@
     </div>
 </div> -->
 
+
+<!-- Toggle Registration -->
+<script>
+function toggleRegistration() {
+    const regForm = document.getElementById("regFormContainer");
+    const toggleButton = document.getElementById("registrationToggle");
+
+    if (regForm.style.display === "none") {
+        regForm.style.display = "block";
+        toggleButton.textContent = "Unregister";
+        toggleButton.classList.remove("green");
+        toggleButton.classList.add("red");
+    } else {
+        regForm.style.display = "none";
+        toggleButton.textContent = "Registered";
+        toggleButton.classList.remove("red");
+        toggleButton.classList.add("green");
+    }
+}
+</script>
 <!-- Video Controls JS --> 
 
 <script type="text/javascript">
