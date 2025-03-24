@@ -705,8 +705,9 @@ function cleanUpSession() {
     sessionStorage.setItem("selectedPeripherals", JSON.stringify(selectedPeripherals));
 
     // Reload the page
-    location.reload();
-}
+    document.getElementById("id_disconnect").addEventListener("click", () => {
+        location.reload();
+});
 
 // Restore selections after reload
 window.onload = function() {
