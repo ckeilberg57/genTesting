@@ -234,9 +234,7 @@ body {
         text-align:center;
         }
         .clabel{
-            display: none;
-            position: fixed;
-            top: 10;
+            display: inline-block;
             float: left;
             clear: left;
             width: 170px;
@@ -245,9 +243,7 @@ body {
             padding-right: 5px;
         }
         .cinput {
-        display: none;
-        position: fixed;
-        top: 10;
+        display: inline-block;
         float: left;
         }
 
