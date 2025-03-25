@@ -177,6 +177,10 @@
   <button onclick="savePeripherals()">Submit</button>
 </div>
 
+<button id="reloadButton" style="position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); background: red; color: white; padding: 10px 20px; border: none; cursor: pointer;">
+    Disconnect & Reload
+</button>
+
 <!-- Video Stage -->
 <div class="videoStage" align="center">
   <video width="98%" id="video" playsinline="playsinline" poster="img/hospital.gif" class="mediastream" muted autoplay="autoplay"></video>
@@ -192,10 +196,6 @@
     <label id="regerror" class="red"></label><br/>
     </form>
 </div>
-
-<button id="reloadButton" style="position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); background: red; color: white; padding: 10px 20px; border: none; cursor: pointer;">
-    Disconnect & Reload
-</button>
     
 <br><br>
     <div style="display: none;">
@@ -688,36 +688,6 @@ videoSelect.onchange = start;
 
 start();
 
-</script>
-
-<script>
-    document.getElementById("reloadButton").addEventListener("click", () => {
-    // Simulate clicking the existing disconnect button for the video window
-    document.getElementById("id_disconnect").click();
-
-    // Store selected peripherals in session storage
-    let peripherals = {
-        camera: localStorage.getItem("selectedCamera"),
-        microphone: localStorage.getItem("selectedMic"),
-        speaker: localStorage.getItem("selectedSpeaker"),
-    };
-    sessionStorage.setItem("peripherals", JSON.stringify(peripherals));
-
-    // Reload the page after a short delay to allow disconnect action
-    setTimeout(() => {
-        location.reload();
-    }, 500); // Adjust delay if needed
-});
-
-// Restore peripherals after page reload
-window.addEventListener("load", () => {
-    let storedPeripherals = JSON.parse(sessionStorage.getItem("peripherals"));
-    if (storedPeripherals) {
-        localStorage.setItem("selectedCamera", storedPeripherals.camera);
-        localStorage.setItem("selectedMic", storedPeripherals.microphone);
-        localStorage.setItem("selectedSpeaker", storedPeripherals.speaker);
-    }
-});
 </script>
 
 </body>
