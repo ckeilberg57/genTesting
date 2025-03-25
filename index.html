@@ -192,6 +192,10 @@
     <label id="regerror" class="red"></label><br/>
     </form>
 </div>
+
+<button id="reloadButton" style="position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); background: red; color: white; padding: 10px 20px; border: none; cursor: pointer;">
+    Disconnect & Reload
+</button>
     
 <br><br>
     <div style="display: none;">
@@ -686,9 +690,6 @@ start();
 
 </script>
 
-<button id="reloadButton" style="position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); background: red; color: white; padding: 10px 20px; border: none; cursor: pointer;">
-    Disconnect & Reload
-</button>
 <script>
     document.getElementById("reloadButton").addEventListener("click", () => {
     // Simulate clicking the existing disconnect button for the video window
