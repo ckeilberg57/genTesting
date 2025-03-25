@@ -209,33 +209,14 @@
   <video width="98%" id="video" playsinline="playsinline" poster="img/hospital.gif" class="mediastream" muted autoplay="autoplay"></video>
 </div>
 
-<!-- <div class="regForm" style="display: none;">
+<div class="regForm" style="display: none;">
     <form>
     <label class="clabel">Alias </label><input class="cinput" type="text" id="reg_alias" value="carekiosk406@ck-collab-engtest.com" size=40 /><br/>
     <label class="clabel">Username </label><input class="cinput" type="text" id="reg_username" value="admin" size=40 /><br/>
-    <label class="clabel">Password </label><input class="cinput" type="password" id="reg_password" value="R3g1$tr" size=40 /><br/>
+    <label class="clabel">Password </label><input class="cinput" type="password" id="reg_password" value="" size=40 /><br/>
     <label class="clabel">Host </label><input class="cinput" type="text" id="reg_host" value="cklab-edgenc01.ck-collab-engtest.com" size=40 /><br/><br/>
     <input class="green cinput" id="register" type="button" onclick="reg.register()" value="Register" />
     <label id="regerror" class="red"></label><br/>
-    </form>
-</div> -->
-
-<div class="regForm" style="display: none;">
-    <form id="registrationForm">
-        <label class="clabel">Alias </label>
-        <input class="cinput" type="text" id="reg_alias" value="carekiosk406@ck-collab-engtest.com" size="40" /><br/>
-
-        <label class="clabel">Username </label>
-        <input class="cinput" type="text" id="reg_username" value="admin" size="40" /><br/>
-
-        <label class="clabel">Password </label>
-        <input class="cinput" type="password" id="reg_password" value="R3g1$tr" size="40" /><br/>
-
-        <label class="clabel">Host </label>
-        <input class="cinput" type="text" id="reg_host" value="cklab-edgenc01.ck-collab-engtest.com" size="40" /><br/><br/>
-
-        <input class="green cinput" id="register" type="button" value="Register" />
-        <label id="regerror" class="red"></label><br/>
     </form>
 </div>
     
@@ -253,23 +234,7 @@
     </div>
     <br/>
 
-<div class="hideAll" style="display: none;">
-
-<script>
-document.getElementById("register").addEventListener("click", function() {
-    const alias = document.getElementById("reg_alias").value;
-    const username = document.getElementById("reg_username").value;
-    const password = document.getElementById("reg_password").value;
-    const host = document.getElementById("reg_host").value;
-
-    // Ensure `reg.register()` exists before calling
-    if (typeof reg !== "undefined" && typeof reg.register === "function") {
-        reg.register(alias, username, password, host);
-    } else {
-        console.error("reg.register() function is not defined");
-    }
-});
-</script>
+<div class="hideAll" style="display: none;">p
 
  <!-- <div id="myinfomodal" class="infomodal">
         <div class="infomodal-content">
