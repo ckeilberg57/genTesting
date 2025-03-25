@@ -143,46 +143,6 @@
       });
     </script>
 
-    <script>
-        document.getElementById("register").addEventListener("click", function() {
-    const alias = document.getElementById("reg_alias").value;
-    const username = document.getElementById("reg_username").value;
-    const password = document.getElementById("reg_password").value;
-    const host = document.getElementById("reg_host").value;
-    const errorLabel = document.getElementById("regerror");
-
-    // Clear previous errors
-    errorLabel.textContent = "";
-
-    // Check if password is empty
-    if (!password) {
-        errorLabel.textContent = "Current status is unregistered";
-        errorLabel.style.color = "red";
-        return;
-    }
-
-    // Ensure `reg.register()` exists before calling
-    if (typeof reg !== "undefined" && typeof reg.register === "function") {
-        reg.register(alias, username, password, host)
-            .then(response => {
-                if (response.success) {
-                    errorLabel.textContent = "Registration successful!";
-                    errorLabel.style.color = "green";
-                } else {
-                    errorLabel.textContent = "Failed to register: " + response.message;
-                    errorLabel.style.color = "red";
-                }
-            })
-            .catch(err => {
-                errorLabel.textContent = "Error: " + err.message;
-                errorLabel.style.color = "red";
-            });
-    } else {
-        errorLabel.textContent = "Registration function not found.";
-    }
-});
-    </script>
-
     <!-- External Scripts -->
     <script type="text/javascript" src="https://cklab-edgenc01.ck-collab-engtest.com/static/webrtc/js/pexrtc.js" defer></script>
     <script type="text/javascript" src="js/feec/pexrtc-wrapper.js" defer></script>
