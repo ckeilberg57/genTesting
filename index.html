@@ -701,22 +701,23 @@ start();
     };
     sessionStorage.setItem("peripherals", JSON.stringify(peripherals));
 
-    // Reload the page after a short delay to allow disconnect action
-    setTimeout(() => {
-        location.reload();
-    }, 500); // Adjust delay if needed
-});
-
-// Restore peripherals after page reload
-window.addEventListener("load", () => {
-    let storedPeripherals = JSON.parse(sessionStorage.getItem("peripherals"));
-    if (storedPeripherals) {
-        localStorage.setItem("selectedCamera", storedPeripherals.camera);
-        localStorage.setItem("selectedMic", storedPeripherals.microphone);
-        localStorage.setItem("selectedSpeaker", storedPeripherals.speaker);
+    // Prevent infinite reloading by checking if the page has already reloaded
+    if (!sessionStorage.getItem("reloaded")) {
+        sessionStorage.setItem("reloaded", "true"); // Mark the session as reloaded
+        setTimeout(() => {
+            location.reload();
+        }, 500); // Adjust delay if needed
     }
-});
 
+    // Restore peripherals after page reload
+    window.addEventListener("load", () => {
+        let storedPeripherals = JSON.parse(sessionStorage.getItem("peripherals"));
+        if (storedPeripherals) {
+            localStorage.setItem("selectedCamera", storedPeripherals.camera);
+            localStorage.setItem("selectedMic", storedPeripherals.microphone);
+            localStorage.setItem("selectedSpeaker", storedPeripherals.speaker);
+        }
+    });
 </script>
 
 </body>
