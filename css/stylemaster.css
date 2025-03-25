@@ -234,7 +234,7 @@ body {
         text-align:center;
         }
         .clabel{
-            display: inline-block;
+            display: none;
             float: left;
             clear: left;
             width: 170px;
@@ -243,7 +243,7 @@ body {
             padding-right: 5px;
         }
         .cinput {
-        display: inline-block;
+        display: none;
         float: left;
         }
 
