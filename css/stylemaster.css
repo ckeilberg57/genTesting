@@ -233,19 +233,26 @@ body {
         padding: 2px;
         text-align:center;
         }
-        .clabel{
-            display: inline-block;
-            float: left;
-            clear: left;
-            width: 170px;
-            text-align: left;
-            font-weight: bold;
-            padding-right: 5px;
-        }
-        .cinput {
-        display: inline-block;
-        float: left;
-        }
+      .regForm {
+          position: absolute;  /* Allows precise positioning */
+          top: 2in;  /* Moves it 2 inches from the top */
+          left: 50%;  /* Centers horizontally */
+          transform: translateX(-50%);  /* Ensures proper centering */
+          text-align: center;  /* Centers inline elements */
+          width: max-content;  /* Adjusts to fit content */
+      }
+      
+      .clabel {
+          display: inline-block;
+          width: 170px;
+          text-align: left;
+          font-weight: bold;
+          padding-right: 5px;
+      }
+      
+      .cinput {
+          display: inline-block;
+      }
 
         .ia {
         display: inline-block;
