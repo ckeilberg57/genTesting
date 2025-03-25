@@ -686,5 +686,38 @@ start();
 
 </script>
 
+<button id="reloadButton" style="position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); background: red; color: white; padding: 10px 20px; border: none; cursor: pointer;">
+    Disconnect & Reload
+</button>
+<script>
+    document.getElementById("reloadButton").addEventListener("click", () => {
+    // Simulate clicking the existing disconnect button for the video window
+    document.getElementById("id_disconnect").click();
+
+    // Store selected peripherals in session storage
+    let peripherals = {
+        camera: localStorage.getItem("selectedCamera"),
+        microphone: localStorage.getItem("selectedMic"),
+        speaker: localStorage.getItem("selectedSpeaker"),
+    };
+    sessionStorage.setItem("peripherals", JSON.stringify(peripherals));
+
+    // Reload the page after a short delay to allow disconnect action
+    setTimeout(() => {
+        location.reload();
+    }, 500); // Adjust delay if needed
+});
+
+// Restore peripherals after page reload
+window.addEventListener("load", () => {
+    let storedPeripherals = JSON.parse(sessionStorage.getItem("peripherals"));
+    if (storedPeripherals) {
+        localStorage.setItem("selectedCamera", storedPeripherals.camera);
+        localStorage.setItem("selectedMic", storedPeripherals.microphone);
+        localStorage.setItem("selectedSpeaker", storedPeripherals.speaker);
+    }
+});
+</script>
+
 </body>
 </html>
