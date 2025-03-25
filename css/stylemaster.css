@@ -373,22 +373,4 @@ body {
             left: 0;
         }
 
-        #peripheralsMessage {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #e0f7fa;
-            border: 1px solid #0eb3c7;
-            display: none;
-        }
-        #changeButton {
-            background-color: #0eb3c7;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-        #changeButton:hover {
-            background-color: #0bb1c7;
-        }
-
 }
