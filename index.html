@@ -118,19 +118,6 @@
         const header = document.getElementById('headerMenu');
         header.style.display = header.style.display === 'none' ? 'block' : 'none';
       }
-
-      // Ensure disconnect button clears peripherals and redirects
-      document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('id_disconnect').addEventListener('click', () => {
-          // Remove saved peripherals
-          localStorage.removeItem('audioInput');
-          localStorage.removeItem('audioOutput');
-          localStorage.removeItem('videoInput');
-          localStorage.removeItem('peripheralsSet');
-
-          // Redirect to index.html
-          window.location = 'index.html';
-        });
           
         document.getElementById('toggleRegister').addEventListener('click', function() {
             let regForm = document.querySelector('.regForm');
