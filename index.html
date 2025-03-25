@@ -181,10 +181,6 @@
     Disconnect & Reload
 </button>
 
-<div id="peripheralsMessage">
-    Your peripherals are stored from the last setting. <button id="changeButton">Change Peripherals</button>
-</div>
-
 <!-- Video Stage -->
 <div class="videoStage" align="center">
   <video width="98%" id="video" playsinline="playsinline" poster="img/hospital.gif" class="mediastream" muted autoplay="autoplay"></video>
@@ -544,43 +540,14 @@
         document.addEventListener("DOMContentLoaded", () => {
             console.log("Script loaded, adding event listener...");
 
-            // Check if peripherals are already stored
-            let storedPeripherals = JSON.parse(localStorage.getItem("selectedPeripherals"));
-            if (storedPeripherals) {
-                console.log("Stored peripherals found:", storedPeripherals);
-                // Show the message with the stored peripherals and the change button
-                document.getElementById("peripheralsMessage").style.display = "block";
-            }
-
             document.getElementById("reloadButton").addEventListener("click", () => {
                 console.log("Reload button clicked!");
-
-                // Store peripherals in local storage when the button is clicked
-                let peripherals = {
-                    camera: "Camera 1", // Example of selected peripheral, replace with actual selection logic
-                    microphone: "Mic 1",
-                    speaker: "Speaker 1"
-                };
-
-                localStorage.setItem("selectedPeripherals", JSON.stringify(peripherals));
-                console.log("Peripherals saved:", peripherals);
 
                 // Reload the page after a short delay
                 setTimeout(() => {
                     console.log("Reloading page...");
-                    location.reload(); // Reloads the page
+                    location.reload(); // This reloads the page
                 }, 500); // Adjust the delay as needed
-            });
-
-            // Handle the "Change Peripherals" button click
-            document.getElementById("changeButton").addEventListener("click", () => {
-                console.log("Change peripherals clicked!");
-
-                // You can add code here to allow the user to change the peripherals
-                // For now, we will just log and reset the peripherals for demonstration
-                localStorage.removeItem("selectedPeripherals");
-                console.log("Peripherals reset.");
-                document.getElementById("peripheralsMessage").style.display = "none";
             });
         });
     </script>
