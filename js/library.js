@@ -2217,7 +2217,7 @@ var reg = {
       );
       return true;
     } else if (response["status"] == 401) {
-      reg_error.innerHTML = "Failed to register: Unauthorized";
+      reg_error.innerHTML = "Current Status: UNREGISTERED!!";
     } else if (response["status"] == 0) {
       reg_error.innerHTML =
         "Failed to register: " + JSON.stringify(response["data"]);
