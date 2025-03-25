@@ -691,9 +691,7 @@ start();
 </script>
 
 <script>
-    document.getElementById("reloadButton").addEventListener("click", () => {
-    // Simulate clicking the existing disconnect button for the video window
-    document.getElementById("id_disconnect").click();
+    document.getElementById("reloadButton").click();
 
     // Store selected peripherals in session storage
     let peripherals = {
