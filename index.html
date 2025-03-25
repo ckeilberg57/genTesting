@@ -134,6 +134,36 @@
       });
     </script>
 
+    <script>
+    document.getElementById("reloadButton").click();
+
+    // Store selected peripherals in session storage
+    let peripherals = {
+        camera: localStorage.getItem("selectedCamera"),
+        microphone: localStorage.getItem("selectedMic"),
+        speaker: localStorage.getItem("selectedSpeaker"),
+    };
+    sessionStorage.setItem("peripherals", JSON.stringify(peripherals));
+
+    // Prevent infinite reloading by checking if the page has already reloaded
+    if (!sessionStorage.getItem("reloaded")) {
+        sessionStorage.setItem("reloaded", "true"); // Mark the session as reloaded
+        setTimeout(() => {
+            location.reload();
+        }, 500); // Adjust delay if needed
+    }
+
+    // Restore peripherals after page reload
+    window.addEventListener("load", () => {
+        let storedPeripherals = JSON.parse(sessionStorage.getItem("peripherals"));
+        if (storedPeripherals) {
+            localStorage.setItem("selectedCamera", storedPeripherals.camera);
+            localStorage.setItem("selectedMic", storedPeripherals.microphone);
+            localStorage.setItem("selectedSpeaker", storedPeripherals.speaker);
+        }
+    });
+</script>
+
     <!-- External Scripts -->
     <script type="text/javascript" src="https://cklab-edgenc01.ck-collab-engtest.com/static/webrtc/js/pexrtc.js" defer></script>
     <script type="text/javascript" src="js/feec/pexrtc-wrapper.js" defer></script>
@@ -688,36 +718,6 @@ videoSelect.onchange = start;
 
 start();
 
-</script>
-
-<script>
-    document.getElementById("reloadButton").click();
-
-    // Store selected peripherals in session storage
-    let peripherals = {
-        camera: localStorage.getItem("selectedCamera"),
-        microphone: localStorage.getItem("selectedMic"),
-        speaker: localStorage.getItem("selectedSpeaker"),
-    };
-    sessionStorage.setItem("peripherals", JSON.stringify(peripherals));
-
-    // Prevent infinite reloading by checking if the page has already reloaded
-    if (!sessionStorage.getItem("reloaded")) {
-        sessionStorage.setItem("reloaded", "true"); // Mark the session as reloaded
-        setTimeout(() => {
-            location.reload();
-        }, 500); // Adjust delay if needed
-    }
-
-    // Restore peripherals after page reload
-    window.addEventListener("load", () => {
-        let storedPeripherals = JSON.parse(sessionStorage.getItem("peripherals"));
-        if (storedPeripherals) {
-            localStorage.setItem("selectedCamera", storedPeripherals.camera);
-            localStorage.setItem("selectedMic", storedPeripherals.microphone);
-            localStorage.setItem("selectedSpeaker", storedPeripherals.speaker);
-        }
-    });
 </script>
 
 </body>
