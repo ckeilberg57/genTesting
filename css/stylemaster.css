@@ -51,6 +51,7 @@ body {
   cursor: pointer;
   margin-top: 10px;
 }
+
 #changePeripherals {
   background-color: #ff7273;
   color: white;
@@ -60,8 +61,9 @@ body {
   display: none;
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
+  width: 3in; /* Set width to 3 inches */
+  left: 50%;
+  transform: translateX(-50%); /* Center the element */
   z-index: 999;
 }
 
