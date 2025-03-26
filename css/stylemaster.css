@@ -382,4 +382,138 @@ body {
             left: 0;
         }
 
+        /*
+         :::  Controls [.controls] <footer>
+        -------------------------------------------------- */
+        .controls {
+          border-top: 1px solid #fff;
+        }
+        .controls li {
+          float: left;
+          display: inline-block;
+          width: 14%;
+          border-right: 1px solid #fff;
+          border-bottom: 1px solid #fff;
+          vertical-align: center;
+        }
+        .controls li:nth-child(4) {
+          width: 12%;
+        }
+        .controls li:nth-child(6) {
+          width: 18%;
+        }
+        .controls li:last-child {
+          border-right: none !important;
+        }
+        @media only screen and (max-width : 1050px) {
+          .controls li,
+          .controls li:nth-child(4),
+          .controls li:nth-child(6) {
+            width: 33.3333333%;
+          }
+          .controls li:nth-child(3n) {
+            border-right: none;
+          }
+          .controls li:last-child {
+            width: 100%;
+          }
+        }
+        @media only screen and (max-width : 550px) {
+          .controls li,
+          .controls li:nth-child(4),
+          .controls li:nth-child(6) {
+            width: 100%;
+            border-right: none;
+          }
+        }
+        
+        .controls a {
+          font-family: 'pexip', Verdana;
+          display: block;
+          width: 100%;
+          padding: 20px 10px;
+          text-align: center;
+          font-weight: 400;
+          font-size: 0.9em;
+          cursor: pointer;
+          background: #d5d5d5;
+          height: 56px;
+          -webkit-transition: background .3s, color .3s;
+          transition: background .3s, color .3s;
+          vertical-align: middle;
+        }
+        .controls a:hover,
+        .controls a.active { /* active state */
+          background: #0EBEC7;
+          color: #fff;
+          font-weight: 400;
+        }
+        
+        /* Inactive State */
+        .controls .inactive {
+          color: #888;
+          cursor: default;
+        }
+        .controls .inactive:hover {
+          color: #888;
+          background: #d5d5d5;
+        }
+        
+        
+        
+        /*
+         :::  Controls [.controls] -> Icons
+         :::  You can call the .active class in your JS to switch the icons for an active state
+        -------------------------------------------------- */
+        .controls a:before {
+          position: relative;
+          font-family: 'pexip' Verdana;
+          margin-right: 10px;
+          font-size: 1.1em;
+          top: 2px;
+          font-weight: 300;
+          -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Show Selfview */
+        .controls .btn-selfview:before {
+          content: '\e18c';
+        }
+        
+        /* Mute Audio */
+        .controls .btn-audio:before {
+          content: '\e38f';
+        }
+        .controls .btn-audio.selected:before {
+          content: '\e3a4';
+        }
+        
+        /* Mute Video */
+        .controls .btn-video:before {
+          content: '\e2d9';
+        }
+        .controls .btn-video.selected:before {
+          content: '\e2da';
+        }
+        
+        /* Present Screen */
+        .controls .btn-presentscreen:before {
+          content: '\e120';
+        }
+        
+        /* Presentation */
+        .controls .btn-presentation:before {
+          content: '\e121';
+        }
+        
+        /* Go Fullscreen */
+        .controls .btn-fullscreen:before {
+          content: '\e1bf';
+        }
+        
+        /* Disconnect */
+        .controls .btn-disconnect:before {
+          content: '\e290';
+        }
+
 }
