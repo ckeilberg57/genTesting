@@ -2192,7 +2192,7 @@ var reg = {
     this.release_token();
 
     var regunreg = document.getElementById("register");
-    regunreg.value = "Registered";
+    regunreg.value = "Register Endpoint";
     regunreg.className = "green";
     regunreg.onclick = reg.register.bind(this);
   },
