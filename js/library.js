@@ -88,7 +88,7 @@ function endCall() {
   console.log("User wants to end the call.");
   rtc.disconnect();
   video.srcObject = "";
-  video.style.display=none;
+  video.style.display="none";
 }
 
 const panTiltZoomPermissionStatus = navigator.permissions.query({
