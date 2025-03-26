@@ -496,16 +496,6 @@ body {
           content: '\e2da';
         }
         
-        /* Present Screen */
-        .controls .btn-presentscreen:before {
-          content: '\e120';
-        }
-        
-        /* Presentation */
-        .controls .btn-presentation:before {
-          content: '\e121';
-        }
-        
         /* Go Fullscreen */
         .controls .btn-fullscreen:before {
           content: '\e1bf';
