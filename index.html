@@ -140,6 +140,10 @@
                 regForm.style.display = 'none';
             }
         });
+        function registerAndHideForm() {
+            reg.register(); // Call the original registration function
+            document.getElementById("regForm").style.display = "none"; // Hide the form
+        }
       });
     </script>
 
@@ -195,14 +199,14 @@
   <video width="98%" id="video" playsinline="playsinline" poster="img/hospital.gif" class="mediastream" muted autoplay="autoplay"></video>
 </div>
 
-<div class="regForm" style="display: none;">
+<div class="regForm" id="regForm">
     <form>
-    <label class="clabel">Alias </label><input class="cinput" type="text" id="reg_alias" value="carekiosk406@ck-collab-engtest.com" size=40 /><br/>
-    <label class="clabel">Username </label><input class="cinput" type="text" id="reg_username" value="admin" size=40 /><br/>
-    <label class="clabel">Password </label><input class="cinput" type="password" id="reg_password" value="" size=40 /><br/>
-    <label class="clabel">Host </label><input class="cinput" type="text" id="reg_host" value="cklab-edgenc01.ck-collab-engtest.com" size=40 /><br/><br/>
-    <input class="green cinput" id="register" type="button" onclick="reg.register()" value="Press to Register" />
-    <label id="regerror" class="red"></label><br/>
+        <label class="clabel">Alias </label><input class="cinput" type="text" id="reg_alias" value="carekiosk406@ck-collab-engtest.com" size=40 /><br/>
+        <label class="clabel">Username </label><input class="cinput" type="text" id="reg_username" value="admin" size=40 /><br/>
+        <label class="clabel">Password </label><input class="cinput" type="password" id="reg_password" value="" size=40 /><br/>
+        <label class="clabel">Host </label><input class="cinput" type="text" id="reg_host" value="cklab-edgenc01.ck-collab-engtest.com" size=40 /><br/><br/>
+        <input class="green cinput" id="register" type="button" onclick="registerAndHideForm()" value="Press to Register" />
+        <label id="regerror" class="red"></label><br/>
     </form>
 </div>
     
