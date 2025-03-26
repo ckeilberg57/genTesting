@@ -88,7 +88,7 @@ function endCall() {
   console.log("User wants to end the call.");
   rtc.disconnect();
   video = document.querySelector('video#video.mediastream');
-  video.srcObject = "";
+  // video.srcObject = "";
   video.style.display="none";
 }
 
