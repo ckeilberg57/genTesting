@@ -140,6 +140,18 @@
                 regForm.style.display = 'none';
             }
         });
+        // Add event listener to 'Press to Register' button
+        const registerButton = document.getElementById('register');
+        if (registerButton) {
+            registerButton.addEventListener('click', function() {
+                document.querySelector(".regForm").style.display = "none"; // Hide form
+
+                // Move button to top-right
+                registerButton.style.position = "absolute";
+                registerButton.style.top = "10px";
+                registerButton.style.right = "10px";
+            });
+        }
       });
     </script>
 
