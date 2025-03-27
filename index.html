@@ -141,23 +141,23 @@
                 regForm.style.display = 'none';
             }
         });
-        document.addEventListener("DOMContentLoaded", () => {
-            const footer = document.getElementById("controls");
-            const video = document.getElementById("video");
+        document.addEventListener("DOMContentLoaded", function () {
+            const videoElement = document.querySelector(".videoStage");
+            const footerLinks = document.querySelectorAll(".controls a");
         
-            // Hide footer initially
-            footer.style.display = "none";
-        
-            // Observe changes to the class of the video element
-            const observer = new MutationObserver(() => {
-                if (video.classList.contains("mediastream")) {
-                    footer.style.display = "block"; // Show footer
-                } else {
-                    footer.style.display = "none"; // Hide footer
-                }
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.attributeName === "class") {
+                        if (videoElement.classList.contains("mediastream")) {
+                            footerLinks.forEach(link => link.style.display = "block");
+                        } else {
+                            footerLinks.forEach(link => link.style.display = "none");
+                        }
+                    }
+                });
             });
         
-            observer.observe(video, { attributes: true, attributeFilter: ["class"] });
+            observer.observe(videoElement, { attributes: true, attributeFilter: ["class"] });
         });
       });
     </script>
