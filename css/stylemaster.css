@@ -389,7 +389,6 @@ body {
           border-top: 1px solid #fff;
         }
         .controls li {
-          display: none;
           float: left;
           display: inline-block;
           width: 14%;
@@ -430,7 +429,7 @@ body {
         
         .controls a {
           font-family: 'pexip', Verdana;
-          display: block;
+          display: none;
           width: 100%;
           padding: 20px 10px;
           text-align: center;
