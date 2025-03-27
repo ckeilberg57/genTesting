@@ -386,10 +386,10 @@ body {
          :::  Controls [.controls] <footer>
         -------------------------------------------------- */
         .controls {
-          display: none;
           border-top: 1px solid #fff;
         }
         .controls li {
+          display: none;
           float: left;
           display: inline-block;
           width: 14%;
