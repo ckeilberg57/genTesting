@@ -91,6 +91,9 @@
 
         // Show the registration form
         document.querySelector('.regForm').style.display = 'block';
+
+        // Show the footer after registration
+        document.getElementById('controls').style.display = 'block';
       }
 
       // Load saved peripherals into dropdowns
@@ -194,7 +197,7 @@
 <div class="videoStage" align="center">
   <video width="98%" id="video" playsinline="playsinline" poster="img/hospital.gif" class="mediastream" muted autoplay="autoplay"></video>
 
-        <footer id="controls" class="controls cf">
+        <footer id="controls" class="controls cf" style="display: none;">
             <ul>
                 <li><a id="id_selfview" class="webrtcbutton btn-selfview" onclick="toggleSelfview();">Show Selfview</a></li>
                 <li><a id="id_muteaudio" class="webrtcbutton btn-audio" onclick="muteAudioStreams();">Mute Audio</a></li>
