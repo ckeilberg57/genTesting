@@ -429,7 +429,7 @@ body {
         
         .controls a {
           font-family: 'pexip', Verdana;
-          display: block;
+          display: none;
           width: 100%;
           padding: 20px 10px;
           text-align: center;
