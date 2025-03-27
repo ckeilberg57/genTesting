@@ -93,7 +93,9 @@
         document.querySelector('.regForm').style.display = 'block';
 
         // Show the footer after registration
-        document.getElementById('controls a').style.display = 'block';
+        document.querySelectorAll('.controls a').forEach(el => {
+            el.style.display = 'block';
+        });
       }
 
       // Load saved peripherals into dropdowns
