@@ -142,25 +142,25 @@
             }
         });
         document.addEventListener("DOMContentLoaded", function () {
-            const videoElement = document.getElementById("video");  // Assuming your video element has this ID
+            const videoElement = document.getElementById("video");  // Make sure the ID matches your <video> element
             const controls = document.querySelector(".controls");
         
             function toggleControls() {
-                if (videoElement.srcObject && videoElement.srcObject.active) {
+                if (!videoElement.getAttribute("poster")) {  // Poster is removed
                     controls.style.display = "block";  // Show controls
                 } else {
-                    controls.style.display = "none";   // Hide controls if no stream
+                    controls.style.display = "none";   // Hide controls when poster is present
                 }
             }
         
-            // Observe video stream changes
+            // Observe changes in the 'poster' attribute
             const observer = new MutationObserver(() => {
                 toggleControls();
             });
         
-            observer.observe(videoElement, { attributes: true, attributeFilter: ["srcObject"] });
+            observer.observe(videoElement, { attributes: true, attributeFilter: ["poster"] });
         
-            // Also check every second to ensure updates
+            // Also check periodically in case the change is not detected immediately
             setInterval(toggleControls, 1000);
         });
       });
