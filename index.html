@@ -142,22 +142,26 @@
             }
         });
         document.addEventListener("DOMContentLoaded", function () {
-            const videoElement = document.querySelector(".videoStage");
-            const footerLinks = document.querySelectorAll(".controls a");
+            const videoElement = document.getElementById("video");  // Assuming your video element has this ID
+            const controls = document.querySelector(".controls");
         
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.attributeName === "class") {
-                        if (videoElement.classList.contains("mediastream")) {
-                            footerLinks.forEach(link => link.style.display = "block");
-                        } else {
-                            footerLinks.forEach(link => link.style.display = "none");
-                        }
-                    }
-                });
+            function toggleControls() {
+                if (videoElement.srcObject && videoElement.srcObject.active) {
+                    controls.style.display = "block";  // Show controls
+                } else {
+                    controls.style.display = "none";   // Hide controls if no stream
+                }
+            }
+        
+            // Observe video stream changes
+            const observer = new MutationObserver(() => {
+                toggleControls();
             });
         
-            observer.observe(videoElement, { attributes: true, attributeFilter: ["class"] });
+            observer.observe(videoElement, { attributes: true, attributeFilter: ["srcObject"] });
+        
+            // Also check every second to ensure updates
+            setInterval(toggleControls, 1000);
         });
       });
     </script>
