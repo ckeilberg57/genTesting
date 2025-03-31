@@ -389,10 +389,10 @@ body {
       }
       
       .controls li {
-          float: left;
-          display: inline-block;
-          width: 14%;
-          border-right: 1px solid #fff;
+          align-items: center;
+          display: inline-flex;
+          width: 18%;
+          border-right: 10px solid #fff;
           border-bottom: 1px solid #fff;
           vertical-align: center;
       }
@@ -471,19 +471,9 @@ body {
       .controls .btn-disconnect:before { content: '\e290'; }
 
 }
-#controls ul {
-    display: flex;
-    justify-content: center;
-    align-itens: center;
-    padding: 0;
-    margin: 0;
-    gap: 15px;
-}
 
 #controls ul li {
     display: inline-block;
-    justify-content: center;
-    align-itens: center;
 }
 
 .webrtcbutton {
@@ -499,21 +489,4 @@ body {
     text-align: center;
     text-decoration: none;
     transition: background-color 0.3s, transform 0.3s;
-}
-
-.webrtcbutton:hover {
-    background-color: #0a2136; /* Darker color on hover */
-    transform: scale(1.1); /* Slight zoom effect on hover */
-}
-
-.webrtcbutton i {
-    font-size: 24px; /* Adjust the size of the icon */
-}
-
-.webrtcbutton.inactive {
-    background-color: #bdbdbd; /* Grey for inactive buttons */
-}
-
-.webrtcbutton.inactive i {
-    color: #757575; /* Grey icons for inactive state */
 }
