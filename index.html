@@ -143,31 +143,62 @@
         });
         document.addEventListener("DOMContentLoaded", function () {
             const controls = document.getElementById("controls");
-            
+        
             // Initially hide controls
             controls.style.display = "none";
         
-            // Function to handle ICE connection state changes
+            // Define connection states
+            const CONNECTION_STATE = {
+                DISCONNECTED: 'DISCONNECTED',
+                CONNECTING: 'CONNECTING',
+                CONNECTED: 'CONNECTED',
+                ERROR: 'ERROR',
+            };
+        
+            let currentState = CONNECTION_STATE.DISCONNECTED;
+        
+            function updateConnectionState(newState) {
+                currentState = newState;
+                console.log("Updated Connection State:", currentState);
+        
+                if (currentState === CONNECTION_STATE.CONNECTED) {
+                    controls.style.display = "inline-flex"; // Show controls when connected
+                } else {
+                    controls.style.display = "none"; // Hide controls in other states
+                }
+            }
+        
             function handleICEConnectionState(peerConnection) {
                 peerConnection.oniceconnectionstatechange = function () {
                     console.log("ICE Connection State:", peerConnection.iceConnectionState);
-                    
-                    if (peerConnection.iceConnectionState === "connected") {
-                        controls.style.display = "inline-flex"; // Show controls when connected
-                    } else {
-                        controls.style.display = "none"; // Hide controls otherwise
+        
+                    switch (peerConnection.iceConnectionState) {
+                        case "connected":
+                            updateConnectionState(CONNECTION_STATE.CONNECTED);
+                            break;
+                        case "checking":
+                            updateConnectionState(CONNECTION_STATE.CONNECTING);
+                            break;
+                        case "disconnected":
+                        case "failed":
+                        case "closed":
+                            updateConnectionState(CONNECTION_STATE.DISCONNECTED);
+                            break;
+                        default:
+                            updateConnectionState(CONNECTION_STATE.ERROR);
+                            break;
                     }
                 };
             }
         
-            // Assuming `peerConnection` is your WebRTC connection object
-            if (typeof peerConnection !== "undefined") {
-                handleICEConnectionState(peerConnection);
-            } else {
-                console.warn("peerConnection is not defined yet.");
-            }
+            // Wait for WebRTC peer connection to be created
+            let checkPeerConnection = setInterval(function () {
+                if (typeof peerConnection !== "undefined" && peerConnection.iceConnectionState) {
+                    clearInterval(checkPeerConnection);
+                    handleICEConnectionState(peerConnection);
+                }
+            }, 500); // Check every 500ms
         });
-      });
     </script>
 
     <!-- External Scripts -->
