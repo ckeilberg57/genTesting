@@ -98,6 +98,8 @@ function endCall() {
   video = document.querySelector('video#video.mediastream');
   // video.srcObject = "";
   video.style.display="none";
+  // Hide the footer controls
+  document.getElementById("controls").style.display = "none"; // Hide the footer
 }
 
 const panTiltZoomPermissionStatus = navigator.permissions.query({
