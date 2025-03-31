@@ -17,6 +17,12 @@ function remoteDisconnect(reason) {
   //alert(reason);
   window.removeEventListener("beforeunload", finalise);
   //window.close();
+
+  // Hide the footer when disconnected
+  document.getElementById("controls").style.display = "none"; // Hide the footer
+  
+  // Optionally, you can log the reason for disconnection
+  console.log("Disconnected: " + reason);
 }
 
 function doneSetup(videoURL, pin_status) {
@@ -31,6 +37,8 @@ function connected(videoURL) {
   } else {
     video.src = videoURL;
   }
+  // Show the footer controls when connected
+  document.getElementById("controls").style.display = "block"; // Show the footer
 }
 
 function feccHandler(signal) {
