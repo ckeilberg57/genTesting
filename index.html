@@ -142,28 +142,30 @@
             }
         });
         document.addEventListener("DOMContentLoaded", function () {
-            const videoElement = document.getElementById("video");
             const controls = document.getElementById("controls");
-        
+            
             // Initially hide controls
             controls.style.display = "none";
         
-            // Function to check if WebRTC stream is active
-            function checkWebRTCStream() {
-                if (videoElement.srcObject && videoElement.srcObject.getTracks().length > 0) {
-                    controls.style.display = "inline-flex"; // Show controls when stream is present
-                } else {
-                    controls.style.display = "none"; // Hide controls if no active stream
-                }
+            // Function to handle ICE connection state changes
+            function handleICEConnectionState(peerConnection) {
+                peerConnection.oniceconnectionstatechange = function () {
+                    console.log("ICE Connection State:", peerConnection.iceConnectionState);
+                    
+                    if (peerConnection.iceConnectionState === "connected") {
+                        controls.style.display = "inline-flex"; // Show controls when connected
+                    } else {
+                        controls.style.display = "none"; // Hide controls otherwise
+                    }
+                };
             }
         
-            // Monitor when a WebRTC stream is added
-            const observer = new MutationObserver(checkWebRTCStream);
-            observer.observe(videoElement, { attributes: true, attributeFilter: ["srcObject"] });
-        
-            // Also check when the video starts playing
-            videoElement.onloadedmetadata = checkWebRTCStream;
-            videoElement.onemptied = checkWebRTCStream; // Hide if stream is removed
+            // Assuming `peerConnection` is your WebRTC connection object
+            if (typeof peerConnection !== "undefined") {
+                handleICEConnectionState(peerConnection);
+            } else {
+                console.warn("peerConnection is not defined yet.");
+            }
         });
       });
     </script>
