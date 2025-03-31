@@ -482,6 +482,8 @@ body {
 
 #controls ul li {
     display: inline-block;
+    justify-content: center;
+    align-itens: center;
 }
 
 .webrtcbutton {
