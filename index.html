@@ -142,33 +142,30 @@
             }
         });
         document.addEventListener("DOMContentLoaded", function () {
-            const videoElement = document.getElementById("video");  // Corrected ID
-            const controls = document.querySelector(".controls");
+            const videoElement = document.getElementById("video");
+            const controls = document.getElementById("controls");
         
-            function toggleControls() {
-                if (!videoElement.getAttribute("poster") || videoElement.readyState >= 2) { 
-                    // Poster removed or video has started playing
-                    controls.style.display = "flex";  // Show footer (use flex for ul alignment)
-                } else {
-                    controls.style.display = "none";  // Hide controls if poster is present
+            // Hide controls initially
+            controls.style.display = "none";
+        
+            // Check if video has a playing stream
+            videoElement.onplay = function () {
+                if (!videoElement.poster) {
+                    controls.style.display = "block";
                 }
-            }
+            };
         
-            // Observe changes in the 'poster' attribute
-            const observer = new MutationObserver(() => {
-                toggleControls();
-            });
+            // Listen for when a stream is added
+            videoElement.onloadeddata = function () {
+                if (!videoElement.poster) {
+                    controls.style.display = "block";
+                }
+            };
         
-            observer.observe(videoElement, { attributes: true, attributeFilter: ["poster"] });
-        
-            // Also, detect when the video starts playing
-            videoElement.addEventListener("play", function () {
-                videoElement.removeAttribute("poster");  // Ensure poster is removed
-                toggleControls();  // Show controls
-            });
-        
-            // Initial check in case the poster was already removed
-            toggleControls();
+            // Hide controls if video is paused or no participant
+            videoElement.onpause = function () {
+                controls.style.display = "none";
+            };
         });
       });
     </script>
