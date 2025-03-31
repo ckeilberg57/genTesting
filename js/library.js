@@ -32,6 +32,10 @@ function doneSetup(videoURL, pin_status) {
 
 function connected(videoURL) {
   video.poster = "";
+
+  // Make sure the video element is visible again
+  video.style.display = "block"; // Show the video element
+  
   if (typeof MediaStream !== "undefined" && videoURL instanceof MediaStream) {
     video.srcObject = videoURL;
   } else {
