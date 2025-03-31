@@ -461,17 +461,6 @@ body {
           font-weight: 300;
       }
       
-      /* Specific icons */
-      .controls .btn-selfview:before { content: '\e18c'; }
-      .controls .btn-audio:before { content: '\e38f'; }
-      .controls .btn-audio.selected:before { content: '\e3a4'; }
-      .controls .btn-video:before { content: '\e2d9'; }
-      .controls .btn-video.selected:before { content: '\e2da'; }
-      .controls .btn-fullscreen:before { content: '\e1bf'; }
-      .controls .btn-disconnect:before { content: '\e290'; }
-
-}
-
 #controls ul li {
     display: inline-block;
 }
@@ -485,7 +474,7 @@ body {
     background-color: #0eb3c7; /* Button background color */
     border-radius: 50%; /* Makes it round */
     color: white;
-    font-size: 18px; /* Adjust icon size */
+    font-size: 32px; /* Adjust icon size */
     text-align: center;
     text-decoration: none;
     transition: background-color 0.3s, transform 0.3s;
