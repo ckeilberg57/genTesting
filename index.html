@@ -197,13 +197,23 @@
 
         <footer id="controls" class="controls cf">
             <ul>
-                <li><a id="id_selfview" class="webrtcbutton btn-selfview" onclick="toggleSelfview();">Show Selfview</a></li>
-                <li><a id="id_muteaudio" class="webrtcbutton btn-audio" onclick="muteAudioStreams();">Mute Audio</a></li>
-                <li><a id="id_mutevideo" class="webrtcbutton btn-video" onclick="muteVideoStreams();">Mute Video</a></li>
-                <li><a id="id_fullscreen" class="webrtcbutton btn-fullscreen inactive" onclick="goFullscreen();">Fullscreen</a></li>
+                <li><a id="id_selfview" class="webrtcbutton btn-selfview" onclick="toggleSelfview();">Show Selfview">
+                    <i class="fa fa-camera"></i>
+                </a></li>
+                <li><a id="id_muteaudio" class="webrtcbutton btn-audio" onclick="muteAudioStreams();">Mute Audio">
+                    <i class="fa fa-microphone-slash"></i>
+                </a></li>
+                <li><a id="id_mutevideo" class="webrtcbutton btn-video" onclick="muteVideoStreams();">Mute Video">
+                    <i class="fa fa-video-slash"></i>
+                </a></li>
+                <li><a id="id_fullscreen" class="webrtcbutton btn-fullscreen inactive" onclick="goFullscreen();">Fullscreen">
+                    <i class="fa fa-expand"></i>
+                </a></li>
                 <!-- <li><a id="id_screenshare" class="webrtcbutton btn-presentscreen inactive" onclick="presentScreen();">Present Screen</a></li>
                 <li><a id="id_presentation" class="webrtcbutton btn-presentation inactive" onclick="togglePresentation();">No Presentation Active</a></li> -->
-                <li><a id="disconnectUser" class="webrtcbutton btn-disconnect" onclick="endCall();">Disconnect</a></li>
+                <li><a id="disconnectUser" class="webrtcbutton btn-disconnect" onclick="endCall();">Disconnect">
+                    <i class="fa fa-phone-slash"></i>
+                </a></li>
             </ul>
         </footer>
 </div>
