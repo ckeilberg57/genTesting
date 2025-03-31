@@ -145,27 +145,26 @@
             const videoElement = document.getElementById("video");
             const controls = document.getElementById("controls");
         
-            // Hide controls initially
+            // Initially hide controls
             controls.style.display = "none";
         
-            // Check if video has a playing stream
-            videoElement.onplay = function () {
-                if (!videoElement.poster) {
-                    controls.style.display = "block";
+            // Function to check if video has a real stream
+            function checkVideoStream() {
+                if (videoElement.srcObject && videoElement.srcObject.active) {
+                    controls.style.display = "inline-flex"; // Show controls
+                } else {
+                    controls.style.display = "none"; // Hide controls
                 }
-            };
+            }
         
-            // Listen for when a stream is added
-            videoElement.onloadeddata = function () {
-                if (!videoElement.poster) {
-                    controls.style.display = "block";
-                }
-            };
+            // Observe when video stream is added
+            const observer = new MutationObserver(checkVideoStream);
+            observer.observe(videoElement, { attributes: true, attributeFilter: ["srcObject"] });
         
-            // Hide controls if video is paused or no participant
-            videoElement.onpause = function () {
-                controls.style.display = "none";
-            };
+            // Listen for stream changes
+            videoElement.onplay = checkVideoStream;
+            videoElement.onloadeddata = checkVideoStream;
+            videoElement.onpause = checkVideoStream;
         });
       });
     </script>
