@@ -142,14 +142,15 @@
             }
         });
         document.addEventListener("DOMContentLoaded", function () {
-            const videoElement = document.getElementById("videoStage");  // Make sure the ID matches your <video> element
+            const videoElement = document.getElementById("video");  // Corrected ID
             const controls = document.querySelector(".controls");
         
             function toggleControls() {
-                if (!videoElement.getAttribute("poster")) {  // Poster is removed
-                    controls.style.display = "block";  // Show controls
+                if (!videoElement.getAttribute("poster") || videoElement.readyState >= 2) { 
+                    // Poster removed or video has started playing
+                    controls.style.display = "flex";  // Show footer (use flex for ul alignment)
                 } else {
-                    controls.style.display = "none";   // Hide controls when poster is present
+                    controls.style.display = "none";  // Hide controls if poster is present
                 }
             }
         
@@ -160,8 +161,14 @@
         
             observer.observe(videoElement, { attributes: true, attributeFilter: ["poster"] });
         
-            // Also check periodically in case the change is not detected immediately
-            setInterval(toggleControls, 1000);
+            // Also, detect when the video starts playing
+            videoElement.addEventListener("play", function () {
+                videoElement.removeAttribute("poster");  // Ensure poster is removed
+                toggleControls();  // Show controls
+            });
+        
+            // Initial check in case the poster was already removed
+            toggleControls();
         });
       });
     </script>
