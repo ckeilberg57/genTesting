@@ -149,19 +149,30 @@ color:#FF0000;
 
       /* New for controls */
       .controls {
-          border-top: 1px solid #fff;
-          display: none; /* Hide entire controls by default */
-      }
-      
-      .controls li {
-          align-items: center;
-          display: inline-block;
-          width: 18%;
-          border-right: 10px solid #fff;
-          border-bottom: 1px solid #fff;
-          vertical-align: center;
-      }
-      
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Align items in the middle */
+        border-top: 1px solid #fff;
+        margin-top: 10px; /* Space between video and buttons */
+        padding-top: 10px;
+        width: 100%; /* Ensure it spans full width */
+    }
+
+    .controls ul {
+        list-style: none;
+        display: flex;
+        justify-content: center; /* Center buttons */
+        padding: 0;
+        margin: 0;
+        gap: 15px; /* Spacing between buttons */
+    }
+          
+    .controls li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+          
       /* Keep buttons hidden until needed */
       .controls a {
           font-family: 'pexip', Verdana;
@@ -183,17 +194,17 @@ color:#FF0000;
           color: #fff;
       }
 
-.webrtcbutton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    background-color: #0eb3c7; /* Button background color */
-    border-radius: 50%; /* Makes it round */
-    color: white;
-    font-size: 32px; /* Adjust icon size */
-    text-align: center;
-    text-decoration: none;
-    transition: background-color 0.3s, transform 0.3s;
-}
+    .webrtcbutton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        background-color: #0eb3c7;
+        border-radius: 50%;
+        color: white;
+        font-size: 28px;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 0.3s, transform 0.3s;
+    }
