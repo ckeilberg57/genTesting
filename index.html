@@ -741,7 +741,15 @@ function start() {
 }
 
 function applyChanges() {
-  start();
+  if (window.currentCall) { // Ensure there's an active call
+    window.currentCall.audio_source = audioInputSelect.value;
+    window.currentCall.video_source = videoSelect.value;
+    
+    // Apply the device changes without renegotiating the SDP
+    window.currentCall.renegotiate(false);
+  }
+
+  // Hide UI elements after applying changes
   headerMenu.style.display = "none";
   confirmChangeBtn.style.display = "none";
 }
