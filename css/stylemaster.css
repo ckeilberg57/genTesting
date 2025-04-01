@@ -155,33 +155,11 @@ color:#FF0000;
       
       .controls li {
           align-items: center;
-          display: inline-flex;
+          display: inline-block;
           width: 18%;
           border-right: 10px solid #fff;
           border-bottom: 1px solid #fff;
           vertical-align: center;
-      }
-      
-      .controls li:nth-child(4) { width: 12%; }
-      .controls li:nth-child(6) { width: 18%; }
-      .controls li:last-child { border-right: none !important; }
-      
-      @media only screen and (max-width: 1050px) {
-          .controls li,
-          .controls li:nth-child(4),
-          .controls li:nth-child(6) { width: 33.3333333%; }
-          
-          .controls li:nth-child(3n) { border-right: none; }
-          .controls li:last-child { width: 100%; }
-      }
-      
-      @media only screen and (max-width: 550px) {
-          .controls li,
-          .controls li:nth-child(4),
-          .controls li:nth-child(6) {
-              width: 100%;
-              border-right: none;
-          }
       }
       
       /* Keep buttons hidden until needed */
@@ -204,31 +182,6 @@ color:#FF0000;
           background: #0EBEC7;
           color: #fff;
       }
-      
-      /* Inactive buttons */
-      .controls .inactive {
-          color: #888;
-          cursor: default;
-      }
-      
-      .controls .inactive:hover {
-          color: #888;
-          background: #d5d5d5;
-      }
-      
-      /* Icons for controls */
-      .controls a:before {
-          position: relative;
-          font-family: 'pexip', Verdana;
-          margin-right: 10px;
-          font-size: 1.1em;
-          top: 2px;
-          font-weight: 300;
-      }
-      
-#controls ul li {
-    display: inline-block;
-}
 
 .webrtcbutton {
     display: flex;
