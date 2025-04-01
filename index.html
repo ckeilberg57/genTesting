@@ -171,9 +171,6 @@
     <label for="videoSource">Camera:</label>
     <select id="videoSource"></select>
   </p>
-  <!-- Confirm Change Button (Initially Hidden) -->
-  <button id="confirmChangeBtn" onclick="applyChanges()" style="background-color: #0eb3c7; color: white; padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer;">Confirm Change</button>
-</div>
     
 <!-- Popup Form -->
 <div id="popupForm" class="popup-form">
@@ -740,20 +737,6 @@ function start() {
     video: {deviceId: videoSource ? {exact: videoSource} : undefined}
   };
   navigator.mediaDevices.getUserMedia(constraints).then(gotStream).then(gotDevices).catch(handleError);
-}
-
-function applyChanges() {
-  if (window.currentCall) { // Ensure there's an active call
-    window.currentCall.audio_source = audioInputSelect.value;
-    window.currentCall.video_source = videoSelect.value;
-    
-    // Apply the device changes without renegotiating the SDP
-    window.currentCall.renegotiate(false);
-  }
-
-  // Hide UI elements after applying changes
-  headerMenu.style.display = "none";
-  confirmChangeBtn.style.display = "none";
 }
 
 audioInputSelect.onchange = start;
