@@ -112,6 +112,14 @@ body {
   background-color: #06b;
 }
 
+.green {
+color:#198b16;
+}
+
+.red {
+color:#FF0000;
+}
+
       .regForm {
           position: absolute;  /* Allows precise positioning */
           top: 2in;  /* Moves it 2 inches from the top */
