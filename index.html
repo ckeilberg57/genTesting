@@ -171,6 +171,8 @@
     <label for="videoSource">Camera:</label>
     <select id="videoSource"></select>
   </p>
+  <!-- Confirm Change Button (Initially Hidden) -->
+  <button id="confirmChange" onclick="applyChanges()" style="display: none; background-color: #0eb3c7; color: white; padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer;">Confirm Change</button>
 </div>
     
 <!-- Popup Form -->
@@ -736,6 +738,12 @@ function start() {
     video: {deviceId: videoSource ? {exact: videoSource} : undefined}
   };
   navigator.mediaDevices.getUserMedia(constraints).then(gotStream).then(gotDevices).catch(handleError);
+}
+
+function applyChanges() {
+  start();
+  headerMenu.style.display = "none";
+  confirmChangeBtn.style.display = "none";
 }
 
 audioInputSelect.onchange = start;
