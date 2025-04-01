@@ -149,7 +149,7 @@ color:#FF0000;
 
       /* New for controls */
       .controls {
-        display: flex;
+        display: none;
         justify-content: center; /* Center horizontally */
         align-items: center; /* Align items in the middle */
         border-top: 1px solid #fff;
