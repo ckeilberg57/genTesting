@@ -106,6 +106,25 @@ function endCall() {
   document.getElementById("controls").style.display = "none"; // Hide the footer
 }
 
+function switchDevices(videoDeviceId, audioDeviceId) {
+    navigator.mediaDevices
+    .getUserMedia({
+        video: {
+        deviceId: videoDeviceId,
+        },
+        audio: {
+        deviceId: audioDeviceId,
+        },
+    })
+    .then((stream) => {
+        rtc.user_media_stream = stream;
+        rtc.renegotiate(false);
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+}
+
 var reg = {
   token: null,
   event_source: null,
