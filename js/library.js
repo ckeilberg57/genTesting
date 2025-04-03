@@ -7,15 +7,15 @@ var rtc = null;
 
 /* ~~~ SETUP AND TEARDOWN ~~~ */
 
-function finalise(event) {
-  rtc.disconnect();
-  video.src = "";
-}
+//function finalise(event) {
+  //rtc.disconnect();
+ // video.src = "";
+//}
 
-function remoteDisconnect(reason) {
-  //cleanup();
+//function remoteDisconnect(reason) {
+  //cleanup(); 
   //alert(reason);
-  window.removeEventListener("beforeunload", finalise);
+  //window.removeEventListener("beforeunload", finalise);
   //window.close();
 
   // Hide the footer when disconnected
