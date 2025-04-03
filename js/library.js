@@ -111,22 +111,9 @@ function switchDevices(videoDeviceId, audioDeviceId) {
         return;
     }
 
-    navigator.mediaDevices
-        .getUserMedia({
-            video: {
-            deviceId: videoDeviceId,
-            },
-            audio: {
-            deviceId: audioDeviceId,
-            },
-        })
-        .then((stream) => {
-            rtc.user_media_stream = stream;
-            rtc.renegotiate(false);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+    rtc.video_source = videoDeviceId;
+    rtc.audio_source = audioDeviceId;
+    rtc.renegotiate();
 }
 
 var reg = {
