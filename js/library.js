@@ -7,10 +7,10 @@ var rtc = null;
 
 /* ~~~ SETUP AND TEARDOWN ~~~ */
 
-//function finalise(event) {
-  //rtc.disconnect();
- // video.src = "";
-//}
+function finalise(event) {
+  rtc.disconnect();
+  video.src = "";
+}
 
 //function remoteDisconnect(reason) {
   //cleanup(); 
