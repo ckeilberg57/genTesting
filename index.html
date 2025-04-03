@@ -65,75 +65,35 @@
         });
       }
 
-        // Save selected peripherals and trigger renegotiation
-        function savePeripherals() {
-            const audioSource = document.getElementById('popupAudioSource').value;
-            const audioOutput = document.getElementById('popupAudioOutput').value;
-            const videoSource = document.getElementById('popupVideoSource').value;
-        
-            // Save to localStorage
-            localStorage.setItem('audioInput', audioSource);
-            localStorage.setItem('audioOutput', audioOutput);
-            localStorage.setItem('videoInput', videoSource);
-            localStorage.setItem('peripheralsSet', 'true'); // Mark as set
-        
-            // Update header dropdowns
-            document.getElementById('audioSource').value = audioSource;
-            document.getElementById('audioOutput').value = audioOutput;
-            document.getElementById('videoSource').value = videoSource;
-        
-            // Hide the popup and display the header menu
-            document.getElementById('popupForm').style.display = 'none';
-            document.getElementById('headerMenu').style.display = 'none';
-            document.getElementById('changePeripherals').style.display = 'block';
-        
-            // Trigger renegotiation
-            renegotiate(audioSource, audioOutput, videoSource);
-        
-            // Hide the peripherals form
-            document.getElementById('popupForm').style.display = 'none';
-        
-            // Show the registration form
-            document.querySelector('.regForm').style.display = 'block';
-        }
+      // Save selected peripherals and close the popup
+      function savePeripherals() {
+        const audioSource = document.getElementById('popupAudioSource').value;
+        const audioOutput = document.getElementById('popupAudioOutput').value;
+        const videoSource = document.getElementById('popupVideoSource').value;
 
+        // Save to localStorage
+        localStorage.setItem('audioInput', audioSource);
+        localStorage.setItem('audioOutput', audioOutput);
+        localStorage.setItem('videoInput', videoSource);
+        localStorage.setItem('peripheralsSet', 'true'); // Mark as set
 
-        async function renegotiate(audioSource, audioOutput, videoSource) {
-            try {
-                // Get new media streams based on selected devices
-                const newAudioStream = await navigator.mediaDevices.getUserMedia({
-                    audio: { deviceId: audioSource },
-                    video: { deviceId: videoSource }
-                });
-        
-                // Update the video and audio tracks in the existing media stream
-                const videoTrack = newAudioStream.getVideoTracks()[0];
-                const audioTrack = newAudioStream.getAudioTracks()[0];
-        
-                // Update video element's media stream (if needed)
-                const videoElement = document.getElementById('video');
-                const currentStream = videoElement.srcObject;
-        
-                if (currentStream) {
-                    const currentVideoTrack = currentStream.getVideoTracks()[0];
-                    const currentAudioTrack = currentStream.getAudioTracks()[0];
-                    
-                    currentStream.removeTrack(currentVideoTrack);
-                    currentStream.removeTrack(currentAudioTrack);
-        
-                    currentStream.addTrack(videoTrack);
-                    currentStream.addTrack(audioTrack);
-        
-                    videoElement.srcObject = currentStream;
-                }
-        
-                // Assuming `resend_sdp` is a function responsible for renegotiating SDP
-                await resend_sdp(newAudioStream); // You need to implement this based on your signaling logic
-            } catch (error) {
-                console.error('Error during renegotiation:', error);
-            }
-        }
+        // Update header dropdowns
+        document.getElementById('audioSource').value = audioSource;
+        document.getElementById('audioOutput').value = audioOutput;
+        document.getElementById('videoSource').value = videoSource;
 
+        // Hide the popup and display the header menu
+        document.getElementById('popupForm').style.display = 'none';
+        document.getElementById('headerMenu').style.display = 'none';
+        document.getElementById('changePeripherals').style.display = 'block';
+
+        // Hide the peripherals form
+        document.getElementById('popupForm').style.display = 'none';
+
+        // Show the registration form
+        document.querySelector('.regForm').style.display = 'block';
+          
+      }
 
       // Load saved peripherals into dropdowns
       function loadPeripherals() {
