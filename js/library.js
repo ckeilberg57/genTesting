@@ -81,7 +81,7 @@ function initialise(
   rtc.onSetup = doneSetup;
   rtc.onConnect = connected;
   rtc.onError = remoteDisconnect;
-  rtc.onDisconnect = remoteDisconnect;
+  //rtc.onDisconnect = remoteDisconnect;
   rtc.onFECC = feccHandler;
   rtc.onApplicationMessage = handleApplicationMessage;
 
