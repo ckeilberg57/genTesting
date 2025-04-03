@@ -12,10 +12,10 @@ function finalise(event) {
   video.src = "";
 }
 
-//function remoteDisconnect(reason) {
+function remoteDisconnect(reason) {
   //cleanup(); 
   //alert(reason);
-  //window.removeEventListener("beforeunload", finalise);
+  window.removeEventListener("beforeunload", finalise);
   //window.close();
 
   // Hide the footer when disconnected
