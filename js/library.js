@@ -230,25 +230,6 @@ var reg = {
     return true;
   },
 
-  // incoming : function(event) {
-  //     incoming_data = JSON.parse(event.data);
-  //     console.log("incoming");
-  //     var confirm_string = "Incoming call from:\n" +
-  //                         incoming_data["remote_display_name"] +
-  //                         " ( " + incoming_data["remote_alias"] +
-  //                         " )\nanswer?";
-  //    if (confirm(confirm_string)) {
-  //        // Answer the call
-  //        document.getElementById("conference").value = incoming_data["conference_alias"];
-  //        document.getElementById("worker").value = this.node;
-  //        document.getElementById("pin").value = "";
-  //        user.join_with_token(incoming_data["token"]);
-  //    } else {
-  // Reject the call
-  //        this.release_incoming_token(incoming_data['token'], incoming_data['conference_alias']);
-  //    }
-  // },
-
   //Same info as previous section, but with an auto-confirm
   incoming: function (event) {
     incoming_data = JSON.parse(event.data);
@@ -266,22 +247,6 @@ var reg = {
       reg.token,
       incoming_data["token"]
     );
-
-    //  var confirm_string=window.confirm;
-    //  window.confirm=function(){
-    //      window.confirm=confirm_string;
-    //     return true;
-    // };
-    // if (confirm(confirm_string)) {
-    //     // Answer the call
-    //     document.getElementById("conference").value = incoming_data["conference_alias"];
-    //     document.getElementById("worker").value = this.node;
-    //     document.getElementById("pin").value = "";
-    //     user.join_with_token(incoming_data["token"]);
-    // } else {
-    //     this.release_incoming_token(incoming_data['token'], incoming_data['conference_alias']);
-    // }
-  },
 
   incoming_cancelled: function (event) {
     incoming_data = JSON.parse(event.data);
