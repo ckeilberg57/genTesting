@@ -71,6 +71,8 @@
         const audioOutput = document.getElementById('popupAudioOutput').value;
         const videoSource = document.getElementById('popupVideoSource').value;
 
+        switchDevices(videoSource, audioSource);
+
         // Save to localStorage
         localStorage.setItem('audioInput', audioSource);
         localStorage.setItem('audioOutput', audioOutput);
@@ -171,7 +173,7 @@
     <label for="videoSource">Camera:</label>
     <select id="videoSource"></select>
   </p>
-  <button onclick="changePeripherals()">Save</button>
+  <button onclick="savePeripherals()">Save</button>
 </div>
     
 <!-- Popup Form -->
