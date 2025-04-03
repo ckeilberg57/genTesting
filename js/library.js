@@ -83,7 +83,6 @@ function initialise(
   rtc.onError = remoteDisconnect;
   //rtc.onDisconnect = remoteDisconnect;
   rtc.onFECC = feccHandler;
-  rtc.renegotiate(resend_sdp);
   rtc.onApplicationMessage = handleApplicationMessage;
   rtc.makeCall(node, conference, name, bandwidth);
 }
