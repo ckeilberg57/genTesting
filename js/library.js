@@ -121,7 +121,6 @@ function switchDevices(videoDeviceId, audioDeviceId) {
             },
         })
         .then((stream) => {
-            selfViewElement.srcObject = stream;
             rtc.user_media_stream = stream;
             rtc.renegotiate(false);
         })
