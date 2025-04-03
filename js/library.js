@@ -247,6 +247,7 @@ var reg = {
       reg.token,
       incoming_data["token"]
     );
+  },
 
   incoming_cancelled: function (event) {
     incoming_data = JSON.parse(event.data);
