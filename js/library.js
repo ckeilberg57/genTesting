@@ -107,22 +107,27 @@ function endCall() {
 }
 
 function switchDevices(videoDeviceId, audioDeviceId) {
+    if (rtc === null) {
+        return;
+    }
+
     navigator.mediaDevices
-    .getUserMedia({
-        video: {
-        deviceId: videoDeviceId,
-        },
-        audio: {
-        deviceId: audioDeviceId,
-        },
-    })
-    .then((stream) => {
-        rtc.user_media_stream = stream;
-        rtc.renegotiate(false);
-    })
-    .catch((error) => {
-        console.error(error);
-    });
+        .getUserMedia({
+            video: {
+            deviceId: videoDeviceId,
+            },
+            audio: {
+            deviceId: audioDeviceId,
+            },
+        })
+        .then((stream) => {
+            selfViewElement.srcObject = stream;
+            rtc.user_media_stream = stream;
+            rtc.renegotiate(false);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
 }
 
 var reg = {
