@@ -87,13 +87,13 @@ function initialise(
   rtc.makeCall(node, conference, name, bandwidth);
 }
 
-try {
-  const stream = navigator.mediaDevices.getUserMedia({
-    video: { pan: true, tilt: true, zoom: true },
-  });
-} catch (error) {
-  console.log(error);
-}
+//try {
+  //const stream = navigator.mediaDevices.getUserMedia({
+    //video: { pan: true, tilt: true, zoom: true },
+  //});
+//} catch (error) {
+  //console.log(error);
+//}
 
 
 function endCall() {
