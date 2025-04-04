@@ -374,10 +374,10 @@ currentTracks.forEach(track => {
 navigator.mediaDevices
     .getUserMedia({
         video: {
-            deviceId: "52f5c9ae032ad77878717947d390fe28de864cbbfba7e214707375dc2a3e06a0"
+            deviceId: ""
         },
         audio: {
-            deviceId: "fadec3086826827c7440485743b40a0062c425762e99567f0581404d97a6beee"
+            deviceId: ""
         }
     })
     .then((stream) => {
