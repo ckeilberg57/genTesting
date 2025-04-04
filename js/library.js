@@ -106,31 +106,6 @@ function endCall() {
   document.getElementById("controls").style.display = "none"; // Hide the footer
 }
 
-let selfViewElement = document.getElementById("selfviewVideo");
-let currentTracks = selfViewElement.srcObject.getTracks();
-currentTracks.forEach(track => {
-    console.debug("toggleCamera: Stopping track: ", track);
-    track.stop()
-});
-navigator.mediaDevices
-    .getUserMedia({
-        video: {
-            deviceId: "52f5c9ae032ad77878717947d390fe28de864cbbfba7e214707375dc2a3e06a0"
-        },
-        audio: {
-            deviceId: "fadec3086826827c7440485743b40a0062c425762e99567f0581404d97a6beee"
-        }
-    })
-    .then((stream) => {
-        console.debug("toggleCamera: Updating stream: ", stream);
-        selfViewElement.srcObject = stream;
-        PEX.pexrtc.user_media_stream = stream;
-        PEX.pexrtc.renegotiate(false);
-    })
-    .catch((error) => {
-        console.error("toggleCamera: ", error);
-    });
-
 var reg = {
   token: null,
   event_source: null,
