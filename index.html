@@ -65,37 +65,39 @@
         });
       }
 
-    function updateMediaStream() {
-      const videoDeviceId = localStorage.getItem('videoInput');
-      const audioDeviceId = localStorage.getItem('audioInput');
+        function applySelectedPeripherals() {
+        const videoInput = localStorage.getItem('videoInput');
+        const audioInput = localStorage.getItem('audioInput');
     
-      const selfViewElement = document.getElementById("video");
+        let selfViewElement = document.getElementById("video");
+        if (!selfViewElement) return;
     
-      // Stop all current tracks
-      if (selfViewElement.srcObject) {
-        const currentTracks = selfViewElement.srcObject.getTracks();
+        let currentTracks = selfViewElement.srcObject ? selfViewElement.srcObject.getTracks() : [];
+    
         currentTracks.forEach(track => {
-          console.debug("updateMediaStream: Stopping track: ", track);
-          track.stop();
+            console.debug("Stopping current track:", track);
+            track.stop();
         });
-      }
     
-      // Request new media stream
-      navigator.mediaDevices
-        .getUserMedia({
-          video: { deviceId: videoDeviceId ? { exact: videoDeviceId } : undefined },
-          audio: { deviceId: audioDeviceId ? { exact: audioDeviceId } : undefined }
+        navigator.mediaDevices.getUserMedia({
+            video: {
+                deviceId: videoInput ? { exact: videoInput } : undefined
+            },
+            audio: {
+                deviceId: audioInput ? { exact: audioInput } : undefined
+            }
         })
         .then((stream) => {
-          console.debug("updateMediaStream: Updating stream: ", stream);
-          selfViewElement.srcObject = stream;
-          if (PEX && PEX.pexrtc) {
-            PEX.pexrtc.user_media_stream = stream;
-            PEX.pexrtc.renegotiate(false);
-          }
+            console.debug("Applying new stream:", stream);
+            selfViewElement.srcObject = stream;
+    
+            if (typeof PEX !== "undefined" && PEX.pexrtc) {
+                PEX.pexrtc.user_media_stream = stream;
+                PEX.pexrtc.renegotiate(false);
+            }
         })
         .catch((error) => {
-          console.error("updateMediaStream: ", error);
+            console.error("Failed to apply selected peripherals:", error);
         });
     }
 
@@ -127,8 +129,8 @@
         // Show the registration form
         document.querySelector('.regForm').style.display = 'block';
 
-        // ✅ Update the media stream
-        updateMediaStream();
+        // ✅ Applu the media stream
+        applySelectedPeripherals();
           
       }
 
