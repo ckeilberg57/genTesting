@@ -10,6 +10,141 @@
     <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 
+    <script defer>
+ window.onload = async () => {
+        // Load devices and set initial state
+        await loadDevices();
+
+        // Check if peripherals have already been set
+        if (sessionStorage.getItem('peripheralsSet') === 'true') {
+          loadPeripherals();
+          document.getElementById('popupForm').style.display = 'none';
+        } else {
+          document.getElementById('popupForm').style.display = 'block';
+        }
+
+        // Simulate register button click after loading devices
+        setTimeout(() => {
+          const registerButton = document.getElementById('register');
+          if (registerButton) registerButton.click();
+        }, 100);
+      };
+
+      // Load available devices into dropdowns
+      async function loadDevices() {
+        try {
+          const devices = await navigator.mediaDevices.enumerateDevices();
+
+          const audioInput = devices.filter(device => device.kind === 'audioinput');
+          const audioOutput = devices.filter(device => device.kind === 'audiooutput');
+          const videoInput = devices.filter(device => device.kind === 'videoinput');
+
+          // Populate both popup and header dropdowns
+          populateSelect('popupAudioSource', audioInput);
+          populateSelect('popupAudioOutput', audioOutput);
+          populateSelect('popupVideoSource', videoInput);
+
+          populateSelect('audioSource', audioInput);
+          populateSelect('audioOutput', audioOutput);
+          populateSelect('videoSource', videoInput);
+
+        } catch (error) {
+          console.error('Error loading devices:', error);
+        }
+      }
+
+      // Populate dropdown with device options
+      function populateSelect(selectId, devices) {
+        const select = document.getElementById(selectId);
+        select.innerHTML = '';
+        devices.forEach(device => {
+          const option = document.createElement('option');
+          option.value = device.deviceId;
+          option.textContent = device.label || 'Unknown Device';
+          select.appendChild(option);
+        });
+      }
+
+      // Save selected peripherals and close the popup
+      function savePeripherals() {
+        const audioSource = document.getElementById('popupAudioSource').value;
+        const audioOutput = document.getElementById('popupAudioOutput').value;
+        const videoSource = document.getElementById('popupVideoSource').value;
+
+        // Save to localStorage
+        localStorage.setItem('audioInput', audioSource);
+        localStorage.setItem('audioOutput', audioOutput);
+        localStorage.setItem('videoInput', videoSource);
+        localStorage.setItem('peripheralsSet', 'true'); // Mark as set
+
+        // Update header dropdowns
+        document.getElementById('audioSource').value = audioSource;
+        document.getElementById('audioOutput').value = audioOutput;
+        document.getElementById('videoSource').value = videoSource;
+
+        // Hide the popup and display the header menu
+        document.getElementById('popupForm').style.display = 'none';
+        document.getElementById('headerMenu').style.display = 'none';
+        document.getElementById('changePeripherals').style.display = 'block';
+
+        // Hide the peripherals form
+        document.getElementById('popupForm').style.display = 'none';
+
+        // Show the registration form
+        document.querySelector('.regForm').style.display = 'block';
+          
+      }
+
+      // Load saved peripherals into dropdowns
+      function loadPeripherals() {
+        const audioInput = localStorage.getItem('audioInput');
+        const audioOutput = localStorage.getItem('audioOutput');
+        const videoInput = localStorage.getItem('videoInput');
+
+        if (audioInput) {
+          document.getElementById('popupAudioSource').value = audioInput;
+          document.getElementById('audioSource').value = audioInput;
+        }
+        if (audioOutput) {
+          document.getElementById('popupAudioOutput').value = audioOutput;
+          document.getElementById('audioOutput').value = audioOutput;
+        }
+        if (videoInput) {
+          document.getElementById('popupVideoSource').value = videoInput;
+          document.getElementById('videoSource').value = videoInput;
+        }
+      }
+
+      // Toggle visibility of header menu
+      function toggleHeaderMenu() {
+        const header = document.getElementById('headerMenu');
+        header.style.display = header.style.display === 'none' ? 'block' : 'none';
+      }
+
+      // Ensure disconnect button clears peripherals and redirects
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('id_disconnect').addEventListener('click', () => {
+          // Remove saved peripherals
+          localStorage.removeItem('audioInput');
+          localStorage.removeItem('audioOutput');
+          localStorage.removeItem('videoInput');
+          localStorage.removeItem('peripheralsSet');
+
+          // Redirect to index.html
+          window.location = 'index.html';
+        });
+        
+        document.getElementById('toggleRegister').addEventListener('click', function() {
+            let regForm = document.querySelector('.regForm');
+            if (regForm.style.display === 'none' || regForm.style.display === '') {
+                regForm.style.display = 'block';
+            } else {
+                regForm.style.display = 'none';
+            }
+        });
+     });
+    </script>
+
     <!-- External Scripts -->
     <script type="text/javascript" src="https://cklab-edgenc01.ck-collab-engtest.com/static/webrtc/js/pexrtc.js" defer></script>
     <!-- <script type="text/javascript" src="js/feec/pexrtc-wrapper.js" defer></script>
@@ -37,6 +172,21 @@
     <select id="videoSource"></select>
   </p>
   <button onclick="savePeripherals()">Save</button>
+</div>
+    
+<!-- Popup Form -->
+<div id="popupForm" class="popup-form">
+  <h2>Confirm Your Peripherals</h2>
+  <label for="popupAudioSource">Microphone:</label>
+  <select id="popupAudioSource"></select>
+
+  <label for="popupAudioOutput">Speakers:</label>
+  <select id="popupAudioOutput"></select>
+
+  <label for="popupVideoSource">Camera:</label>
+  <select id="popupVideoSource"></select>
+
+  <button onclick="savePeripherals()">Submit</button>
 </div>
 
 <button id="reloadButton" style="position: fixed; top: 10px; right: 10px; width: 50px; height: 50px; background: #FF7273; color: white; padding: 0; border: none; cursor: pointer;">
@@ -71,7 +221,7 @@
         </footer>
 </div>
 
-<div class="regForm" id="regForm" style="display:block;">
+<div class="regForm" id="regForm" style="display:none;">
     <form>
         <label class="clabel">Alias </label><input class="cinput" type="text" id="reg_alias" value="carekiosk406@ck-collab-engtest.com" size=40 /><br/>
         <label class="clabel">Username </label><input class="cinput" type="text" id="reg_username" value="admin" size=40 /><br/>
@@ -428,23 +578,6 @@
     </script>    
 
     <script>
-    // Toggle visibility of header menu
-      function toggleHeaderMenu() {
-        const header = document.getElementById('headerMenu');
-        header.style.display = header.style.display === 'none' ? 'block' : 'none';
-      }
-        
-        document.getElementById('toggleRegister').addEventListener('click', function() {
-            let regForm = document.querySelector('.regForm');
-            if (regForm.style.display === 'none' || regForm.style.display === '') {
-                regForm.style.display = 'block';
-            } else {
-                regForm.style.display = 'none';
-            }
-        });
-    </script>
-
-    <script>
         document.addEventListener("DOMContentLoaded", () => {
             console.log("Script loaded, adding event listener...");
 
@@ -462,6 +595,49 @@
 
 <!-- Video Controls JS --> 
 
+<script type="text/javascript">
+
+(function() {
+  
+  $('li').text('');
+  
+    var co = $('ul').find('li').each(function(){
+    var $this = $(this),
+        $author = $this.data('item');
+    
+    var author = $('<span></span>', {
+      class: 'item-close',
+      text: $author
+    }).appendTo( $this.closest('li') );
+      
+  });
+  
+  var $close = $('.close'),
+      $pop = $('.pop'),
+      $iconvidon = $('.icon-star'),
+      $iconvidoff = $('.icon-star-half-full'),
+      $iconmicon = $('.icon-microphone'),
+      $iconmicoff = $('.icon-microphone-off'),
+      $iconspeakerson = $('.icon-volume-up'),
+      $iconspeakersoff = $('.icon-volume-off'),
+      $icontrayclose = $('.icon-resize-small'),
+      $icontrayopen = $('.icon-plus-sign-alt'),
+      $iconbox = $('.icon-box'),
+      $itemclose = $('.item-close'),
+      $button = $('#btn');
+  
+    $($button).on('click', function() {
+        $($close, $pop).toggleClass('close pop');
+        $($iconvidon, $iconvidoff).toggleClass('icon-star icon-star-half-full');
+        $($iconmicon, $iconmicoff).toggleClass('icon-microphone icon-microphone-off');
+        $($iconspeakerson, $iconspeakersoff).toggleClass('icon-volume-up icon-volume-off');
+        $($icontrayopen, $icontrayclose).toggleClass('icon-plus-sign-alt icon-resize-small');
+        $($itemclose).toggleClass('item-close item-open');
+        $($button).toggleClass('active');
+        
+    });
+})();
+</script>
 
 <!-- Select Media Devices in Settings -->
 
@@ -573,7 +749,6 @@ videoSelect.onchange = start;
 start();
 
 </script>
-
 
 </body>
 </html>
