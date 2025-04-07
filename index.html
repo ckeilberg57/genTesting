@@ -66,40 +66,27 @@
       }
 
         function applySelectedPeripherals() {
-        const videoInput = localStorage.getItem('videoInput');
-        const audioInput = localStorage.getItem('audioInput');
-    
-        let selfViewElement = document.getElementById("video");
-        if (!selfViewElement) return;
-    
-        let currentTracks = selfViewElement.srcObject ? selfViewElement.srcObject.getTracks() : [];
-    
-        currentTracks.forEach(track => {
-            console.debug("Stopping current track:", track);
-            track.stop();
-        });
-    
-        navigator.mediaDevices.getUserMedia({
-            video: {
-                deviceId: videoInput ? { exact: videoInput } : undefined
-            },
-            audio: {
-                deviceId: audioInput ? { exact: audioInput } : undefined
+          const videoSource = localStorage.getItem('videoInput');
+          const audioSource = localStorage.getItem('audioInput');
+        
+          navigator.mediaDevices.getUserMedia({
+            video: videoSource ? { deviceId: { exact: videoSource } } : true,
+            audio: audioSource ? { deviceId: { exact: audioSource } } : true
+          }).then((stream) => {
+            const videoElement = document.getElementById("video"); // update to your actual video element ID
+        
+            if (videoElement) {
+              videoElement.srcObject = stream;
             }
-        })
-        .then((stream) => {
-            console.debug("Applying new stream:", stream);
-            selfViewElement.srcObject = stream;
-    
-            if (typeof PEX !== "undefined" && PEX.pexrtc) {
-                PEX.pexrtc.user_media_stream = stream;
-                PEX.pexrtc.renegotiate(false);
-            }
-        })
-        .catch((error) => {
-            console.error("Failed to apply selected peripherals:", error);
-        });
-    }
+        
+            // Replace stream in PexRTC
+            PEX.pexrtc.user_media_stream = stream;
+            PEX.pexrtc.renegotiate(false); // Tell Pexip to renegotiate with the new stream
+        
+          }).catch((error) => {
+            console.error("Failed to apply media devices:", error);
+          });
+        }
 
       // Save selected peripherals and close the popup
       function savePeripherals() {
@@ -122,9 +109,6 @@
         document.getElementById('popupForm').style.display = 'none';
         document.getElementById('headerMenu').style.display = 'none';
         document.getElementById('changePeripherals').style.display = 'block';
-
-        // Hide the peripherals form
-        document.getElementById('popupForm').style.display = 'none';
 
         // Show the registration form
         document.querySelector('.regForm').style.display = 'block';
