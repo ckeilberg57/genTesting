@@ -11,8 +11,89 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 
     <script defer>
+ window.onload = async () => {
+        // Load devices and set initial state
+        await loadDevices();
+
+        // Check if peripherals have already been set
+        if (sessionStorage.getItem('peripheralsSet') === 'true') {
+          loadPeripherals();
+          document.getElementById('popupForm').style.display = 'none';
+        } else {
+          document.getElementById('popupForm').style.display = 'block';
+        }
+
+        // Simulate register button click after loading devices
+        setTimeout(() => {
+          const registerButton = document.getElementById('register');
+          if (registerButton) registerButton.click();
+        }, 100);
+      };
+
+      // Load available devices into dropdowns
+      async function loadDevices() {
+        try {
+          const devices = await navigator.mediaDevices.enumerateDevices();
+
+          const audioInput = devices.filter(device => device.kind === 'audioinput');
+          const audioOutput = devices.filter(device => device.kind === 'audiooutput');
+          const videoInput = devices.filter(device => device.kind === 'videoinput');
+
+          // Populate both popup and header dropdowns
+          populateSelect('popupAudioSource', audioInput);
+          populateSelect('popupAudioOutput', audioOutput);
+          populateSelect('popupVideoSource', videoInput);
+
+          populateSelect('audioSource', audioInput);
+          populateSelect('audioOutput', audioOutput);
+          populateSelect('videoSource', videoInput);
+
+        } catch (error) {
+          console.error('Error loading devices:', error);
+        }
+      }
+
+      // Populate dropdown with device options
+      function populateSelect(selectId, devices) {
+        const select = document.getElementById(selectId);
+        select.innerHTML = '';
+        devices.forEach(device => {
+          const option = document.createElement('option');
+          option.value = device.deviceId;
+          option.textContent = device.label || 'Unknown Device';
+          select.appendChild(option);
+        });
+      }
+
+      // Save selected peripherals and close the popup
+      function savePeripherals() {
+        const audioSource = document.getElementById('popupAudioSource').value;
+        const audioOutput = document.getElementById('popupAudioOutput').value;
+        const videoSource = document.getElementById('popupVideoSource').value;
+
+        // Save to localStorage
+        localStorage.setItem('audioInput', audioSource);
+        localStorage.setItem('audioOutput', audioOutput);
+        localStorage.setItem('videoInput', videoSource);
+        localStorage.setItem('peripheralsSet', 'true'); // Mark as set
+
+        // Update header dropdowns
+        document.getElementById('audioSource').value = audioSource;
+        document.getElementById('audioOutput').value = audioOutput;
+        document.getElementById('videoSource').value = videoSource;
+
+        // Hide the popup and display the header menu
+        document.getElementById('popupForm').style.display = 'none';
+        document.getElementById('headerMenu').style.display = 'none';
+        document.getElementById('changePeripherals').style.display = 'block';
+
+        // Hide the peripherals form
+        document.getElementById('popupForm').style.display = 'none';
+
         // Show the registration form
         document.querySelector('.regForm').style.display = 'block';
+          
+      }
 
       // Load saved peripherals into dropdowns
       function loadPeripherals() {
