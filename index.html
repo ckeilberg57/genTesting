@@ -117,9 +117,19 @@
 
       // Toggle visibility of header menu
       function toggleHeaderMenu() {
-        const header = document.getElementById('headerMenu');
-        header.style.display = header.style.display === 'none' ? 'block' : 'none';
+        const menu = document.getElementById('headerMenu');
+        const isVisible = menu.style.display === 'block';
+        menu.style.display = isVisible ? 'none' : 'block';
       }
+    
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function (e) {
+        const menu = document.getElementById('headerMenu');
+        const btn = document.getElementById('changePeripheralsBtn');
+        if (!menu.contains(e.target) && !btn.contains(e.target)) {
+          menu.style.display = 'none';
+        }
+      });
 
       // Ensure disconnect button clears peripherals and redirects
       document.addEventListener('DOMContentLoaded', () => {
@@ -153,24 +163,26 @@
 </head>
 <body>
 
-<!-- Change Peripherals Section -->
-<div id="changePeripherals" onclick="toggleHeaderMenu()">Change Peripherals</div>
-
-<!-- Header Menu (Hidden Initially) -->
-<div id="headerMenu">
-  <p class="select">
-    <label for="audioSource">Microphone:</label>
-    <select id="audioSource"></select>
-  </p>
-  <p class="select">
-    <label for="audioOutput">Speakers:</label>
-    <select id="audioOutput"></select>
-  </p>
-  <p class="select">
-    <label for="videoSource">Camera:</label>
-    <select id="videoSource"></select>
-  </p>
-  <button onclick="savePeripherals()">Save</button>
+<div id="changePeripheralsContainer" style="position: relative;">
+  <button id="changePeripheralsBtn" onclick="toggleHeaderMenu()" style="padding: 8px 12px; background-color: #0eb3c7; color: white; border: none; cursor: pointer; border-radius: 5px;">
+    Change Peripherals ▼
+  </button>
+  
+  <div id="headerMenu" style="display: none; position: absolute; top: 100%; left: 0; background-color: white; border: 1px solid #ccc; padding: 10px; border-radius: 5px; z-index: 1000;">
+    <p class="select">
+      <label for="audioSource">Microphone:</label>
+      <select id="audioSource"></select>
+    </p>
+    <p class="select">
+      <label for="audioOutput">Speakers:</label>
+      <select id="audioOutput"></select>
+    </p>
+    <p class="select">
+      <label for="videoSource">Camera:</label>
+      <select id="videoSource"></select>
+    </p>
+    <button onclick="savePeripherals()" style="background-color: #0eb3c7; color: white; border: none; padding: 5px 10px; border-radius: 4px;">Save</button>
+  </div>
 </div>
     
 <!-- Popup Form -->
