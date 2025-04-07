@@ -123,7 +123,7 @@
 
       // Ensure disconnect button clears peripherals and redirects
       document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('id_disconnect').addEventListener('click', () => {
+      document.getElementById('reloadButton').addEventListener('click', () => {
           // Remove saved peripherals
           localStorage.removeItem('audioInput');
           localStorage.removeItem('audioOutput');
@@ -188,7 +188,7 @@
   <button onclick="savePeripherals()">Submit</button>
 </div>
 
-<button id="id_disconnect" style="position: fixed; top: 10px; right: 10px; width: 50px; height: 50px; background: #FF7273; color: white; padding: 0; border: none; cursor: pointer;">
+<button id="reloadButton" style="position: fixed; top: 10px; right: 10px; width: 50px; height: 50px; background: #FF7273; color: white; padding: 0; border: none; cursor: pointer;">
     Clean Up
 </button>
 
