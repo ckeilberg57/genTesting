@@ -65,29 +65,6 @@
         });
       }
 
-        function applySelectedPeripherals() {
-          const videoSource = localStorage.getItem('videoInput');
-          const audioSource = localStorage.getItem('audioInput');
-        
-          navigator.mediaDevices.getUserMedia({
-            video: videoSource ? { deviceId: { exact: videoSource } } : true,
-            audio: audioSource ? { deviceId: { exact: audioSource } } : true
-          }).then((stream) => {
-            const videoElement = document.getElementById("video"); // update to your actual video element ID
-        
-            if (videoElement) {
-              videoElement.srcObject = stream;
-            }
-        
-            // Replace stream in PexRTC
-            PEX.pexrtc.user_media_stream = stream;
-            PEX.pexrtc.renegotiate(false); // Tell Pexip to renegotiate with the new stream
-        
-          }).catch((error) => {
-            console.error("Failed to apply media devices:", error);
-          });
-        }
-
       // Save selected peripherals and close the popup
       function savePeripherals() {
         const audioSource = document.getElementById('popupAudioSource').value;
@@ -110,11 +87,11 @@
         document.getElementById('headerMenu').style.display = 'none';
         document.getElementById('changePeripherals').style.display = 'block';
 
+        // Hide the peripherals form
+        document.getElementById('popupForm').style.display = 'none';
+
         // Show the registration form
         document.querySelector('.regForm').style.display = 'block';
-
-        // ✅ Applu the media stream
-        applySelectedPeripherals();
           
       }
 
