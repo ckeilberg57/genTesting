@@ -40,16 +40,16 @@
       }
 
       // Populate dropdown with device options
-      function populateSelect(selectId, devices) {
-        const select = document.getElementById(selectId);
-        select.innerHTML = '';
-        devices.forEach(device => {
-          const option = document.createElement('option');
-          option.value = device.deviceId;
-          option.textContent = device.label || 'Unknown Device';
-          select.appendChild(option);
-        });
-      }
+      //function populateSelect(selectId, devices) {
+        //const select = document.getElementById(selectId);
+        //select.innerHTML = '';
+        //devices.forEach(device => {
+          //const option = document.createElement('option');
+          //option.value = device.deviceId;
+          //option.textContent = device.label || 'Unknown Device';
+          //select.appendChild(option);
+        //});
+      //}
 
       // Save selected peripherals and close the popup
       function savePeripherals() {
