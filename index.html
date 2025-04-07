@@ -40,16 +40,16 @@
       }
 
       // Populate dropdown with device options
-      //function populateSelect(selectId, devices) {
-        //const select = document.getElementById(selectId);
-        //select.innerHTML = '';
-        //devices.forEach(device => {
-          //const option = document.createElement('option');
-          //option.value = device.deviceId;
-          //option.textContent = device.label || 'Unknown Device';
-          //select.appendChild(option);
-        //});
-      //}
+      function populateSelect(selectId, devices) {
+        const select = document.getElementById(selectId);
+        select.innerHTML = '';
+        devices.forEach(device => {
+          const option = document.createElement('option');
+          option.value = device.deviceId;
+          option.textContent = device.label || 'Unknown Device';
+          select.appendChild(option);
+        });
+      }
 
       // Save selected peripherals and close the popup
       function savePeripherals() {
@@ -58,10 +58,10 @@
         const videoSource = document.getElementById('popupVideoSource').value;
 
         // Save to localStorage
-        localStorage.setItem('audioInput', audioSource);
-        localStorage.setItem('audioOutput', audioOutput);
-        localStorage.setItem('videoInput', videoSource);
-        localStorage.setItem('peripheralsSet', 'true'); // Mark as set
+        //localStorage.setItem('audioInput', audioSource);
+        //localStorage.setItem('audioOutput', audioOutput);
+        //localStorage.setItem('videoInput', videoSource);
+        //localStorage.setItem('peripheralsSet', 'true'); // Mark as set
 
         // Update header dropdowns
         document.getElementById('audioSource').value = audioSource;
