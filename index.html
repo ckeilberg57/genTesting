@@ -593,52 +593,6 @@
         });
     </script>
 
-<!-- Video Controls JS --> 
-
-<script type="text/javascript">
-
-(function() {
-  
-  $('li').text('');
-  
-    var co = $('ul').find('li').each(function(){
-    var $this = $(this),
-        $author = $this.data('item');
-    
-    var author = $('<span></span>', {
-      class: 'item-close',
-      text: $author
-    }).appendTo( $this.closest('li') );
-      
-  });
-  
-  var $close = $('.close'),
-      $pop = $('.pop'),
-      $iconvidon = $('.icon-star'),
-      $iconvidoff = $('.icon-star-half-full'),
-      $iconmicon = $('.icon-microphone'),
-      $iconmicoff = $('.icon-microphone-off'),
-      $iconspeakerson = $('.icon-volume-up'),
-      $iconspeakersoff = $('.icon-volume-off'),
-      $icontrayclose = $('.icon-resize-small'),
-      $icontrayopen = $('.icon-plus-sign-alt'),
-      $iconbox = $('.icon-box'),
-      $itemclose = $('.item-close'),
-      $button = $('#btn');
-  
-    $($button).on('click', function() {
-        $($close, $pop).toggleClass('close pop');
-        $($iconvidon, $iconvidoff).toggleClass('icon-star icon-star-half-full');
-        $($iconmicon, $iconmicoff).toggleClass('icon-microphone icon-microphone-off');
-        $($iconspeakerson, $iconspeakersoff).toggleClass('icon-volume-up icon-volume-off');
-        $($icontrayopen, $icontrayclose).toggleClass('icon-plus-sign-alt icon-resize-small');
-        $($itemclose).toggleClass('item-close item-open');
-        $($button).toggleClass('active');
-        
-    });
-})();
-</script>
-
 <!-- Select Media Devices in Settings -->
 
 <script type="text/javascript">
