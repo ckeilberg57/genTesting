@@ -428,6 +428,23 @@
     </script>    
 
     <script>
+    // Toggle visibility of header menu
+      function toggleHeaderMenu() {
+        const header = document.getElementById('headerMenu');
+        header.style.display = header.style.display === 'none' ? 'block' : 'none';
+      }
+        
+        document.getElementById('toggleRegister').addEventListener('click', function() {
+            let regForm = document.querySelector('.regForm');
+            if (regForm.style.display === 'none' || regForm.style.display === '') {
+                regForm.style.display = 'block';
+            } else {
+                regForm.style.display = 'none';
+            }
+        });
+    </script>
+
+    <script>
         document.addEventListener("DOMContentLoaded", () => {
             console.log("Script loaded, adding event listener...");
 
