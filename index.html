@@ -65,6 +65,40 @@
         });
       }
 
+    function updateMediaStream() {
+      const videoDeviceId = localStorage.getItem('videoInput');
+      const audioDeviceId = localStorage.getItem('audioInput');
+    
+      const selfViewElement = document.getElementById("video");
+    
+      // Stop all current tracks
+      if (selfViewElement.srcObject) {
+        const currentTracks = selfViewElement.srcObject.getTracks();
+        currentTracks.forEach(track => {
+          console.debug("updateMediaStream: Stopping track: ", track);
+          track.stop();
+        });
+      }
+    
+      // Request new media stream
+      navigator.mediaDevices
+        .getUserMedia({
+          video: { deviceId: videoDeviceId ? { exact: videoDeviceId } : undefined },
+          audio: { deviceId: audioDeviceId ? { exact: audioDeviceId } : undefined }
+        })
+        .then((stream) => {
+          console.debug("updateMediaStream: Updating stream: ", stream);
+          selfViewElement.srcObject = stream;
+          if (PEX && PEX.pexrtc) {
+            PEX.pexrtc.user_media_stream = stream;
+            PEX.pexrtc.renegotiate(false);
+          }
+        })
+        .catch((error) => {
+          console.error("updateMediaStream: ", error);
+        });
+    }
+
       // Save selected peripherals and close the popup
       function savePeripherals() {
         const audioSource = document.getElementById('popupAudioSource').value;
@@ -92,6 +126,9 @@
 
         // Show the registration form
         document.querySelector('.regForm').style.display = 'block';
+
+        // ✅ Update the media stream
+        updateMediaStream();
           
       }
 
