@@ -366,18 +366,26 @@ var remote_alias_autocomplete = new autoComplete({
 });
 
 let selfViewElement = document.getElementById("selfviewVideo");
-let currentTracks = selfViewElement.srcObject.getTracks();
+
+// Stop any existing media tracks
+let currentTracks = selfViewElement?.srcObject?.getTracks() || [];
 currentTracks.forEach(track => {
     console.debug("toggleCamera: Stopping track: ", track);
-    track.stop()
+    track.stop();
 });
+
+// Get selected device IDs from dropdowns
+let selectedVideoDeviceId = document.getElementById("videoSource").value;
+let selectedAudioDeviceId = document.getElementById("audioSource").value;
+
+// Request new stream using selected devices
 navigator.mediaDevices
     .getUserMedia({
         video: {
-            deviceId: ""
+            deviceId: selectedVideoDeviceId ? { exact: selectedVideoDeviceId } : undefined
         },
         audio: {
-            deviceId: ""
+            deviceId: selectedAudioDeviceId ? { exact: selectedAudioDeviceId } : undefined
         }
     })
     .then((stream) => {
@@ -387,5 +395,5 @@ navigator.mediaDevices
         PEX.pexrtc.renegotiate(false);
     })
     .catch((error) => {
-        console.error("toggleCamera: ", error);
+        console.error("toggleCamera error:", error);
     });
