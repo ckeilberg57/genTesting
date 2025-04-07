@@ -11,10 +11,24 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 
     <script defer>
-    window.onload = async () => {
-      await loadDevices();
-      document.getElementById('popupForm').style.display = 'block';
-    };
+ window.onload = async () => {
+        // Load devices and set initial state
+        await loadDevices();
+
+        // Check if peripherals have already been set
+        if (sessionStorage.getItem('peripheralsSet') === 'true') {
+          loadPeripherals();
+          document.getElementById('popupForm').style.display = 'none';
+        } else {
+          document.getElementById('popupForm').style.display = 'block';
+        }
+
+        // Simulate register button click after loading devices
+        setTimeout(() => {
+          const registerButton = document.getElementById('register');
+          if (registerButton) registerButton.click();
+        }, 100);
+      };
 
       // Load available devices into dropdowns
       async function loadDevices() {
@@ -58,10 +72,10 @@
         const videoSource = document.getElementById('popupVideoSource').value;
 
         // Save to localStorage
-        //localStorage.setItem('audioInput', audioSource);
-        //localStorage.setItem('audioOutput', audioOutput);
-        //localStorage.setItem('videoInput', videoSource);
-        //localStorage.setItem('peripheralsSet', 'true'); // Mark as set
+        localStorage.setItem('audioInput', audioSource);
+        localStorage.setItem('audioOutput', audioOutput);
+        localStorage.setItem('videoInput', videoSource);
+        localStorage.setItem('peripheralsSet', 'true'); // Mark as set
 
         // Update header dropdowns
         document.getElementById('audioSource').value = audioSource;
@@ -82,24 +96,24 @@
       }
 
       // Load saved peripherals into dropdowns
-      //function loadPeripherals() {
-        //const audioInput = localStorage.getItem('audioInput');
-        //const audioOutput = localStorage.getItem('audioOutput');
-        //const videoInput = localStorage.getItem('videoInput');
+      function loadPeripherals() {
+        const audioInput = localStorage.getItem('audioInput');
+        const audioOutput = localStorage.getItem('audioOutput');
+        const videoInput = localStorage.getItem('videoInput');
 
-        //if (audioInput) {
-          //document.getElementById('popupAudioSource').value = audioInput;
-          //document.getElementById('audioSource').value = audioInput;
-        //}
-        //if (audioOutput) {
-          //document.getElementById('popupAudioOutput').value = audioOutput;
-          //document.getElementById('audioOutput').value = audioOutput;
-        //}
-        //if (videoInput) {
-          //document.getElementById('popupVideoSource').value = videoInput;
-          //document.getElementById('videoSource').value = videoInput;
-        //}
-      //}
+        if (audioInput) {
+          document.getElementById('popupAudioSource').value = audioInput;
+          document.getElementById('audioSource').value = audioInput;
+        }
+        if (audioOutput) {
+          document.getElementById('popupAudioOutput').value = audioOutput;
+          document.getElementById('audioOutput').value = audioOutput;
+        }
+        if (videoInput) {
+          document.getElementById('popupVideoSource').value = videoInput;
+          document.getElementById('videoSource').value = videoInput;
+        }
+      }
 
       // Toggle visibility of header menu
       function toggleHeaderMenu() {
@@ -120,14 +134,14 @@
           window.location = 'index.html';
         });
         
-        //document.getElementById('toggleRegister').addEventListener('click', function() {
-            //let regForm = document.querySelector('.regForm');
-            //if (regForm.style.display === 'none' || regForm.style.display === '') {
-                //regForm.style.display = 'block';
-            //} else {
-                //regForm.style.display = 'none';
-            //}
-        //});
+        document.getElementById('toggleRegister').addEventListener('click', function() {
+            let regForm = document.querySelector('.regForm');
+            if (regForm.style.display === 'none' || regForm.style.display === '') {
+                regForm.style.display = 'block';
+            } else {
+                regForm.style.display = 'none';
+            }
+        });
      });
     </script>
 
