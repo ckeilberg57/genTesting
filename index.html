@@ -11,11 +11,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 
     <script defer>
- window.onload = async () => {
-        // Load devices and set initial state
-        await loadDevices();
-        document.getElementById('popupForm').style.display = 'block';
-
+    window.onload = async () => {
+      await loadDevices();
+      document.getElementById('popupForm').style.display = 'block';
+    };
 
       // Load available devices into dropdowns
       async function loadDevices() {
