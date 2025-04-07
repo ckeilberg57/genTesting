@@ -364,36 +364,3 @@ var remote_alias_autocomplete = new autoComplete({
     suggest(suggestions);
   },
 });
-
-let selfViewElement = document.getElementById("selfviewVideo");
-
-// Stop any existing media tracks
-let currentTracks = selfViewElement?.srcObject?.getTracks() || [];
-currentTracks.forEach(track => {
-    console.debug("toggleCamera: Stopping track: ", track);
-    track.stop();
-});
-
-// Get selected device IDs from dropdowns
-let selectedVideoDeviceId = document.getElementById("videoSource").value;
-let selectedAudioDeviceId = document.getElementById("audioSource").value;
-
-// Request new stream using selected devices
-navigator.mediaDevices
-    .getUserMedia({
-        video: {
-            deviceId: selectedVideoDeviceId ? { exact: selectedVideoDeviceId } : undefined
-        },
-        audio: {
-            deviceId: selectedAudioDeviceId ? { exact: selectedAudioDeviceId } : undefined
-        }
-    })
-    .then((stream) => {
-        console.debug("toggleCamera: Updating stream: ", stream);
-        selfViewElement.srcObject = stream;
-        PEX.pexrtc.user_media_stream = stream;
-        PEX.pexrtc.renegotiate(false);
-    })
-    .catch((error) => {
-        console.error("toggleCamera error:", error);
-    });
