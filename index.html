@@ -92,9 +92,6 @@
 
         // Show the registration form
         document.querySelector('.regForm').style.display = 'block';
-
-        // 🔥 Apply the selected camera
-        applySelectedVideoDevice();
           
       }
 
@@ -145,24 +142,6 @@
                 regForm.style.display = 'none';
             }
         });
-
-        async function applySelectedVideoDevice() {
-          const videoDeviceId = localStorage.getItem('videoInput');
-          if (!videoDeviceId) return;
-        
-          try {
-            const stream = await navigator.mediaDevices.getUserMedia({
-              video: { deviceId: { exact: videoDeviceId } },
-              audio: false
-            });
-        
-            const videoElement = document.getElementById('video');
-            videoElement.srcObject = stream;
-        
-          } catch (error) {
-            console.error('Error applying selected video device:', error);
-          }
-        }
      });
     </script>
 
